@@ -27,6 +27,42 @@ public class mainMenuController implements Initializable{
     private VBox fade;
 
 
+    @FXML
+    private void play_button_pressed(){
+        play_button.setImage(new Image("dependencies\\play-pressed.png"));
+    }
+    @FXML
+    private void play_button_released(){
+        play_button.setImage(new Image("dependencies\\play.png"));
+        
+    }
+    @FXML
+    private void settings_button_pressed(){
+        
+        settings_button.setImage(new Image("dependencies\\settings-pressed.png"));
+    }
+    @FXML
+    private void settings_button_released(){
+        settings_button.setImage(new Image("dependencies\\settings.png"));
+        
+    }
+    @FXML
+    private void exit_button_pressed(){
+        
+        exit_button.setImage(new Image("dependencies\\exit-pressed.png"));
+    }
+    @FXML
+    private void exit_button_released(){
+        exit_button.setImage(new Image("dependencies\\exit.png"));
+        
+    }
+
+
+
+
+
+
+
 
     private FadeTransition transition_fade;
     private FadeTransition transition_for_enter(){
