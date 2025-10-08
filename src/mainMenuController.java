@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,77 +15,88 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class mainMenuController implements Initializable{
     @FXML
     private ImageView play_button, settings_button, exit_button;
 
     @FXML
-    private void play_button_pressed(){
-        play_button.setImage(new Image("dependencies\\play-pressed.png"));;
-    }
-    @FXML
-    private void play_button_released(){
-        play_button.setImage(new Image("dependencies\\play.png"));;
-    }
+    private VBox fade;
 
 
 
-    @FXML
-    private void settings_button_pressed(){
-        settings_button.setImage(new Image("dependencies\\settings-pressed.png"));
-    }
-    @FXML
-    private void settings_button_released(){
-        settings_button.setImage(new Image("dependencies\\settings.png"));
+    private FadeTransition transition_fade;
+    private FadeTransition transition_for_enter(){
+        transition_fade = new FadeTransition(Duration.seconds(1), fade);
+        transition_fade.setFromValue(0);
+        transition_fade.setToValue(1);
+
+        return transition_fade;
     }
 
+    private FadeTransition transition_for_exit(String where){
+        transition_fade = new FadeTransition(Duration.seconds(1), fade);
+        transition_fade.setFromValue(1);
+        transition_fade.setToValue(0);
 
-    @FXML
-    private void exit_button_pressed(){
-        exit_button.setImage(new Image("dependencies\\exit-pressed.png"));
+        transition_fade.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent arg0) {
+                try {
+                    switch (where) {
+                        case "settings":
+                            Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/settings.fxml")).load(), 600, 400));
+                        break;
+                        case "game":
+                            Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load(), 600, 400));
+                            break;
+                        case "exit":
+                            Main.stage.close();
+                        break;
+                    
+                        default:
+                            break;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        
+        return transition_fade;       
     }
-    @FXML
-    private void exit_button_released(){
-        exit_button.setImage(new Image("dependencies\\exit.png"));
 
-    }
-    
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        play_button.setOnMouseClicked(new EventHandler<Event>() {
+        transition_for_enter().play();
+        Main.fullscreen = false;
+        
 
+
+        // TODO: Implemnt play button
+        play_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
-                
-                try {
-                    
-                    Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load(), 600, 400));
-                    
-                } catch (IOException e) {
-                }
-            }    
+                transition_for_exit(null).play();
+            }
         });
         
         
         exit_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
-                Main.stage.close();
+                transition_for_exit("exit").play();;
             }
         });
 
         settings_button.setOnMouseClicked(new EventHandler<Event>() {
-
             @Override
             public void handle(Event arg0) {
-                try {
-                   
-                    Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/settings.fxml")).load(), 600, 400));
-                    
-                } catch (IOException e) {
-                }
+                transition_for_exit("settings").play();;
             }
         });
     }    
