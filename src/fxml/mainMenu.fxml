@@ -13,7 +13,7 @@
          <children>
             <VBox alignment="CENTER" layoutX="250.0" layoutY="148.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <ImageView fx:id="play_button" fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="play_button" fitHeight="75.0" fitWidth="100.0" onMousePressed="#play_button_pressed" onMouseReleased="#play_button_released" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../dependencies/play.png" />
                      </image>
@@ -22,7 +22,7 @@
                      </cursor>
                   </ImageView>
                   <ImageView fitHeight="15.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="settings_button" fitHeight="65.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="settings_button" fitHeight="65.0" fitWidth="100.0" onMousePressed="#settings_button_pressed" onMouseReleased="#settings_button_released" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../dependencies/settings.png" />
                      </image>
@@ -31,7 +31,7 @@
                      </cursor>
                   </ImageView>
                   <ImageView fitHeight="15.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="exit_button" fitHeight="90.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="exit_button" fitHeight="90.0" fitWidth="100.0" onMousePressed="#exit_button_pressed" onMouseReleased="#exit_button_released" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../dependencies/exit.png" />
                      </image>
