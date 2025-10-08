@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainMenuController">
+<StackPane fx:id="background" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainMenuController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane fx:id="fade" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <VBox fx:id="fade" alignment="CENTER" layoutX="250.0" layoutY="148.0" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" layoutX="250.0" layoutY="148.0" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <ImageView fx:id="play_button" fitHeight="75.0" fitWidth="100.0" onMousePressed="#play_button_pressed" onMouseReleased="#play_button_released" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -41,6 +41,11 @@
                   </ImageView>
                </children>
             </VBox>
+            <ImageView fitHeight="213.0" fitWidth="400.0" layoutX="100.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../dependencies/title.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

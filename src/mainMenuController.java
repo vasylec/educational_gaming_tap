@@ -15,6 +15,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -24,8 +31,10 @@ public class mainMenuController implements Initializable{
     private ImageView play_button, settings_button, exit_button;
 
     @FXML
-    private VBox fade;
+    private AnchorPane fade;
 
+    @FXML
+    private StackPane background;
 
     @FXML
     private void play_button_pressed(){
@@ -111,7 +120,15 @@ public class mainMenuController implements Initializable{
         transition_for_enter().play();
         Main.fullscreen = false;
         
+        BackgroundImage bgImage = new BackgroundImage(
+            new Image("dependencies\\background.png"), 
+            BackgroundRepeat.NO_REPEAT, 
+            BackgroundRepeat.NO_REPEAT, 
+            BackgroundPosition.CENTER, 
+            new BackgroundSize(100, 100, true, true, false, true)
+        );
 
+        background.setBackground(new Background(bgImage));
 
         // TODO: Implemnt play button
         play_button.setOnMouseClicked(new EventHandler<Event>() {
