@@ -3,7 +3,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -11,9 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -22,25 +22,79 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class settingsController implements Initializable{
     @FXML
-    private ImageView back_button, audio_button, video_button;
-
+    private ImageView back_button, audio_button, video_button, apply_button, fullscreen_button;
     @FXML
     private StackPane background;
-
-
     @FXML
     private BorderPane fade;
-
     @FXML
     private GridPane video_pane, audio_pane;
+    @FXML
+    private Slider audio_slider, effect_slider;
+    
 
+    @FXML
+    private void apply_button_pressed(){
+        apply_button.setImage(new Image("dependencies\\apply-pressed.png"));   
+    }
+    @FXML
+    private void apply_button_released(){
+        apply_button.setImage(new Image("dependencies\\apply.png"));   
+    }
+    @FXML
+    private void back_button_pressed(){
+        back_button.setImage(new Image("dependencies\\back-pressed.png"));
+    }
+    @FXML
+    private void back_button_released(){
+        back_button.setImage(new Image("dependencies\\back.png"));
+    }
+    @FXML
+    private void video_button_pressed(){
+        video_button.setImage(new Image("dependencies\\video-pressed.png"));
+    }
+    @FXML
+    private void video_button_released(){
+        video_button.setImage(new Image("dependencies\\video.png"));
+    }
+    @FXML
+    private void audio_button_pressed(){
+        audio_button.setImage(new Image("dependencies\\audio-pressed.png"));
+    }
+    @FXML
+    private void audio_button_released(){
+        audio_button.setImage(new Image("dependencies\\audio.png"));
+    }
 
+    @FXML
+    private void apply_clicked(){
+        Main.backgroundMusic.setVolume(audio_slider.getValue() / 100);
+        
+        Main.eatSound.setVolume(effect_slider.getValue() / 100);
+    }
+
+    @FXML 
+    public void fullscreen_button_action(){
+        
+        
+        
+            if(Main.fullscreen == false){
+
+                fullscreen_button.setImage(new Image("dependencies\\yes.png"));
+                
+                Main.fullscreen = true;
+                Main.stage.setFullScreen(true);
+            }
+            else{
+                fullscreen_button.setImage(new Image("dependencies\\no.png"));
+                Main.fullscreen = false;
+                Main.stage.setFullScreen(false);
+            }
+    }
 
 
 
@@ -73,17 +127,7 @@ public class settingsController implements Initializable{
     };
 
 
-    @FXML
-    public void test(){
-        if(Main.fullscreen == false){
-            Main.fullscreen = true;
-            Main.stage.setFullScreen(true);
-        }
-        else{
-            Main.fullscreen = false;
-            Main.stage.setFullScreen(false);
-        }
-    }
+    
 
 
     @FXML
@@ -96,9 +140,25 @@ public class settingsController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         transition_for_enter().play();
+        audio_slider.setValue(Main.backgroundMusic.getVolume() * 100);
+        effect_slider.setValue(Main.eatSound.getVolume() * 100);
         
         video_pane.setOpacity(0);
         audio_pane.setOpacity(0);
+            
+        
+
+
+        
+        audio_slider.setOnDragEntered(new EventHandler<Event>() {
+            @Override
+            public void handle(Event arg0) {
+                System.out.println(audio_slider.getValue());
+            }
+        });
+        System.out.println(audio_slider.getValue());
+
+        
 
         
 
@@ -123,6 +183,8 @@ public class settingsController implements Initializable{
         video_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
+                video_button.setImage(new Image("dependencies\\video-pressed.png"));
+                audio_button.setImage(new Image("dependencies\\audio.png"));
                 audio_pane.setOpacity(0);
                 audio_pane.setMouseTransparent(true);
                 video_pane.setMouseTransparent(false);
@@ -133,6 +195,8 @@ public class settingsController implements Initializable{
         audio_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
+                video_button.setImage(new Image("dependencies\\video.png"));
+                audio_button.setImage(new Image("dependencies\\audio-pressed.png"));
                 video_pane.setOpacity(0);
                 video_pane.setMouseTransparent(true);
                 audio_pane.setMouseTransparent(false);

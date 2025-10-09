@@ -4,14 +4,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,8 +20,6 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class mainMenuController implements Initializable{
@@ -65,6 +61,7 @@ public class mainMenuController implements Initializable{
         exit_button.setImage(new Image("dependencies\\exit.png"));
         
     }
+    
 
 
 
@@ -93,7 +90,11 @@ public class mainMenuController implements Initializable{
                 try {
                     switch (where) {
                         case "settings":
-                            Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/settings.fxml")).load(), 600, 400));
+                        Scene scene = new Scene(new FXMLLoader(getClass().getResource("fxml/settings.fxml")).load(), 600, 400);    
+                        scene.getStylesheets().add(getClass().getResource("style\\slider-style.css").toExternalForm());
+                        scene.getStylesheets().add(getClass().getResource("style\\retro-style.css").toExternalForm());
+                        
+                        Main.stage.setScene(scene);
                         break;
                         case "game":
                             Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load(), 600, 400));

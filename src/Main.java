@@ -3,6 +3,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -14,8 +17,28 @@ public class Main extends Application{
     public static boolean fullscreen;
     public static String resolution;
 
+    public static MediaPlayer backgroundMusic;
+    
+    public static AudioClip eatSound;
+
    
 
+    private void initializeSound(){
+        try {
+            eatSound = new AudioClip(getClass().getResource("dependencies/sound/eat.wav").toExternalForm());
+            eatSound.setVolume(1.0);
+            backgroundMusic = new MediaPlayer(new Media(getClass().getResource("dependencies\\sound\\background.mp3").toExternalForm()));
+            
+            backgroundMusic.setVolume(1);
+            backgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
+            backgroundMusic.play();
+            
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     
     public static void main(String[] args) {
@@ -26,10 +49,20 @@ public class Main extends Application{
     public void start(Stage stage) throws Exception {
         Main.stage = stage;
 
+        initializeSound();
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/mainMenu.fxml"));
         root = loader.load();
-        
-
         Scene scene = new Scene(root, 1280, 720);
         stage.setTitle("FXML Example");
         stage.setScene(scene);

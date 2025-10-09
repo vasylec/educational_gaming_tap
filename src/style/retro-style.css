@@ -1,0 +1,43 @@
+/* Se aplică tuturor ToggleButton */
+.toggle-button {
+    -fx-font-family: "Consolas", monospace;
+    -fx-font-size: 18px;
+    /* -fx-text-fill: #00ff66; */
+    -fx-background-color: transparent;
+    
+    -fx-border-color: #00ff66;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 0;
+    -fx-padding: 8 24;
+    -fx-effect: dropshadow(gaussian, #00ff66, 8, 0.5, 0, 0);
+    -fx-cursor: hand;
+}
+
+/* Hover */
+.toggle-button:hover {
+    /* -fx-background-color: #002200; */
+}
+
+/* Click */
+.toggle-button:armed {
+    /* -fx-background-color: #003300; */
+    -fx-translate-y: 1px;
+}
+
+/* ON */
+.toggle-button:selected {
+    -fx-background-color: #00ff66;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(gaussian, #00ff66, 20, 0.6, 0, 0);
+}
+
+/* Hover când e ON */
+.toggle-button:selected:hover {
+    -fx-background-color: #33ff99;
+}
+
+/* Focus glow */
+.toggle-button:focused {
+    -fx-effect: dropshadow(gaussian, #00ff66, 20, 0.6, 0, 0);
+}
