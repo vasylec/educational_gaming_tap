@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -97,13 +96,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ToggleButton mnemonicParsing="false" onAction="#test2" text="ToggleButton" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                            <image>
                               <Image url="@../dependencies/fullscreen-label.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="fullscreen_button" fitHeight="64.0" fitWidth="158.0" onMouseClicked="#fullscreen_button_action" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <ImageView fx:id="fullscreen_button" fitHeight="64.0" fitWidth="158.0" onMouseClicked="#fullscreen_button_action" onMousePressed="#yes_no_button_pressed" onMouseReleased="#yes_no_button_released" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <image>
                               <Image url="@../dependencies/no.png" />
                            </image>

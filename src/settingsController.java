@@ -3,6 +3,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -69,11 +70,24 @@ public class settingsController implements Initializable{
     private void audio_button_released(){
         audio_button.setImage(new Image("dependencies\\audio.png"));
     }
+    @FXML
+    private void yes_no_button_pressed(){    
+        fullscreen_button.setImage(new Image("dependencies\\yes-no-pressed.png"));
+    }
+    @FXML
+    private void yes_no_button_released(){
+        if(Main.fullscreen == true)
+            fullscreen_button.setImage(new Image("dependencies\\yes.png"));
+        else
+            fullscreen_button.setImage(new Image("dependencies\\no.png"));
+    }
+
 
     @FXML
     private void apply_clicked(){
+        Main.buttonClick.play();
+
         Main.backgroundMusic.setVolume(audio_slider.getValue() / 100);
-        
         Main.eatSound.setVolume(effect_slider.getValue() / 100);
     }
 
@@ -85,14 +99,15 @@ public class settingsController implements Initializable{
             if(Main.fullscreen == false){
 
                 fullscreen_button.setImage(new Image("dependencies\\yes.png"));
-                
                 Main.fullscreen = true;
-                Main.stage.setFullScreen(true);
+                Platform.runLater(() -> Main.stage.setFullScreen(true));
+                
             }
             else{
                 fullscreen_button.setImage(new Image("dependencies\\no.png"));
                 Main.fullscreen = false;
-                Main.stage.setFullScreen(false);
+                
+                Platform.runLater(() -> Main.stage.setFullScreen(false));
             }
     }
 
@@ -106,14 +121,15 @@ public class settingsController implements Initializable{
         transition_fade.setOnFinished(new EventHandler<ActionEvent>() {
 
             @Override
-            public void handle(ActionEvent arg0) {
-                try {                        
-                    Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/mainMenu.fxml")).load(), 600, 400));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }    
+            public void handle(ActionEvent arg0) {                    
+                Platform.runLater(() -> {
+                    try {
+                        Main.stage.getScene().setRoot(new FXMLLoader(getClass().getResource("fxml/mainMenu.fxml")).load());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });   
             }
-            
         });
 
         return transition_fade;
@@ -143,23 +159,15 @@ public class settingsController implements Initializable{
         audio_slider.setValue(Main.backgroundMusic.getVolume() * 100);
         effect_slider.setValue(Main.eatSound.getVolume() * 100);
         
-        video_pane.setOpacity(0);
+        video_pane.setOpacity(1);
+        video_button.setImage(new Image("dependencies\\video-pressed.png"));
         audio_pane.setOpacity(0);
+
+        if(Main.fullscreen == true)
+            fullscreen_button.setImage(new Image("dependencies\\yes.png"));
+        else
+            fullscreen_button.setImage(new Image("dependencies\\no.png"));
             
-        
-
-
-        
-        audio_slider.setOnDragEntered(new EventHandler<Event>() {
-            @Override
-            public void handle(Event arg0) {
-                System.out.println(audio_slider.getValue());
-            }
-        });
-        System.out.println(audio_slider.getValue());
-
-        
-
         
 
         background.setBackground(new Background(new BackgroundImage(
@@ -176,6 +184,7 @@ public class settingsController implements Initializable{
         back_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
+                Main.buttonClick.play();
                 transition_for_exit().play();
             }
         });
@@ -183,6 +192,7 @@ public class settingsController implements Initializable{
         video_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
+                Main.buttonClick.play();
                 video_button.setImage(new Image("dependencies\\video-pressed.png"));
                 audio_button.setImage(new Image("dependencies\\audio.png"));
                 audio_pane.setOpacity(0);
@@ -195,6 +205,7 @@ public class settingsController implements Initializable{
         audio_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
+                Main.buttonClick.play();
                 video_button.setImage(new Image("dependencies\\video.png"));
                 audio_button.setImage(new Image("dependencies\\audio-pressed.png"));
                 video_pane.setOpacity(0);

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -21,10 +22,11 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import javafx.scene.Parent;
 
 public class mainMenuController implements Initializable{
     @FXML
-    private ImageView play_button, settings_button, exit_button;
+    private ImageView play_button, settings_button, exit_button, inventory_button;
 
     @FXML
     private AnchorPane fade;
@@ -59,7 +61,15 @@ public class mainMenuController implements Initializable{
     @FXML
     private void exit_button_released(){
         exit_button.setImage(new Image("dependencies\\exit.png"));
-        
+    }
+    @FXML
+    private void inventory_button_pressed(){
+        inventory_button.setImage(new Image("dependencies\\inventory-pressed.png"));
+    }
+    @FXML
+    private void inventory_button_released(){
+        inventory_button.setImage(new Image("dependencies\\inventory.png"));
+
     }
     
 
@@ -90,15 +100,21 @@ public class mainMenuController implements Initializable{
                 try {
                     switch (where) {
                         case "settings":
-                        Scene scene = new Scene(new FXMLLoader(getClass().getResource("fxml/settings.fxml")).load(), 600, 400);    
+                        Parent scene = new FXMLLoader(getClass().getResource("fxml/settings.fxml")).load();    
                         scene.getStylesheets().add(getClass().getResource("style\\slider-style.css").toExternalForm());
-                        scene.getStylesheets().add(getClass().getResource("style\\retro-style.css").toExternalForm());
                         
-                        Main.stage.setScene(scene);
+                        Platform.runLater(() -> Main.stage.getScene().setRoot(scene));
                         break;
                         case "game":
-                            Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load(), 600, 400));
-                            break;
+                            Platform.runLater(() -> {
+                                try {
+                                    Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load(), 600, 400));
+                                } 
+                                catch (IOException e) {
+                                    e.printStackTrace();
+                                }    
+                            });
+                        break;
                         case "exit":
                             Main.stage.close();
                         break;
@@ -119,7 +135,6 @@ public class mainMenuController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         transition_for_enter().play();
-        Main.fullscreen = false;
         
         BackgroundImage bgImage = new BackgroundImage(
             new Image("dependencies\\background.png"), 
@@ -135,7 +150,12 @@ public class mainMenuController implements Initializable{
         play_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
-                transition_for_exit(null).play();
+                Main.buttonClick.play();
+
+
+
+
+                // transition_for_exit(null).play();
             }
         });
         
@@ -143,6 +163,7 @@ public class mainMenuController implements Initializable{
         exit_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
+                Main.buttonClick.play();
                 transition_for_exit("exit").play();;
             }
         });
@@ -150,6 +171,7 @@ public class mainMenuController implements Initializable{
         settings_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
+                Main.buttonClick.play();
                 transition_for_exit("settings").play();;
             }
         });

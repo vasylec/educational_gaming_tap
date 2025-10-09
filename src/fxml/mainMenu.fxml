@@ -11,7 +11,7 @@
    <children>
       <AnchorPane fx:id="fade" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <VBox alignment="CENTER" layoutX="250.0" layoutY="148.0" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" layoutX="225.0" layoutY="132.0" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <ImageView fx:id="play_button" fitHeight="75.0" fitWidth="100.0" onMousePressed="#play_button_pressed" onMouseReleased="#play_button_released" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -21,7 +21,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="15.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="inventory_button" fitHeight="89.0" fitWidth="151.0" onMousePressed="#inventory_button_pressed" onMouseReleased="#inventory_button_released" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../dependencies/inventory.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                   <ImageView fx:id="settings_button" fitHeight="65.0" fitWidth="100.0" onMousePressed="#settings_button_pressed" onMouseReleased="#settings_button_released" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../dependencies/settings.png" />
@@ -41,7 +48,7 @@
                   </ImageView>
                </children>
             </VBox>
-            <ImageView fitHeight="213.0" fitWidth="400.0" layoutX="100.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="213.0" fitWidth="400.0" layoutX="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../dependencies/title.png" />
                </image>

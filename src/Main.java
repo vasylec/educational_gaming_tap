@@ -19,7 +19,8 @@ public class Main extends Application{
 
     public static MediaPlayer backgroundMusic;
     
-    public static AudioClip eatSound;
+    public static AudioClip eatSound, buttonClick;
+    
 
    
 
@@ -27,8 +28,11 @@ public class Main extends Application{
         try {
             eatSound = new AudioClip(getClass().getResource("dependencies/sound/eat.wav").toExternalForm());
             eatSound.setVolume(1.0);
-            backgroundMusic = new MediaPlayer(new Media(getClass().getResource("dependencies\\sound\\background.mp3").toExternalForm()));
             
+            buttonClick = new AudioClip(getClass().getResource("dependencies/sound/button_click.wav").toExternalForm());
+            buttonClick.setVolume(1.0);
+
+            backgroundMusic = new MediaPlayer(new Media(getClass().getResource("dependencies\\sound\\background.mp3").toExternalForm()));
             backgroundMusic.setVolume(1);
             backgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
             backgroundMusic.play();
@@ -48,6 +52,7 @@ public class Main extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         Main.stage = stage;
+        Main.fullscreen = false;
 
         initializeSound();
         
