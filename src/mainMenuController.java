@@ -101,7 +101,7 @@ public class mainMenuController implements Initializable{
                     switch (where) {
                         case "settings":
                         Parent scene = new FXMLLoader(getClass().getResource("fxml/settings.fxml")).load();    
-                        scene.getStylesheets().add(getClass().getResource("style\\slider-style.css").toExternalForm());
+                        scene.getStylesheets().add(getClass().getResource("style/slider-style.css").toExternalForm());
                         
                         Platform.runLater(() -> Main.stage.getScene().setRoot(scene));
                         break;
