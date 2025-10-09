@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -109,6 +110,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
+                        <ComboBox fx:id="resolutions" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <ImageView fx:id="apply_button" fitHeight="60.0" fitWidth="155.0" layoutX="419.0" layoutY="203.0" onMouseClicked="#apply_clicked" onMousePressed="#apply_button_pressed" onMouseReleased="#apply_button_released" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
