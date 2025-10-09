@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -36,6 +37,8 @@ public class settingsController implements Initializable{
     private GridPane video_pane, audio_pane;
     @FXML
     private Slider audio_slider, effect_slider;
+    @FXML
+    private ComboBox resolutions;
     
 
     @FXML
@@ -86,8 +89,41 @@ public class settingsController implements Initializable{
     @FXML
     private void apply_clicked(){
         Main.buttonClick.play();
-
         Main.backgroundMusic.setVolume(audio_slider.getValue() / 100);
+
+
+        System.out.println(resolutions.getValue().toString());
+
+        if(!resolutions.getValue().toString().equals(null))
+        switch (resolutions.getValue().toString()) {
+            case "800x600":
+                Main.setResolution(800, 600);
+                break;
+            case "1024x768":
+                Main.setResolution(1024, 768);
+                
+                break;
+            case "1280x720":
+                Main.setResolution(1280, 720);
+                break;
+            case "1366x768":
+                Main.setResolution(1366, 768);
+                break;
+            case "1920x1080":
+                Main.setResolution(1920, 1080);
+                break;
+            case "2560x1440":
+                Main.setResolution(2560, 1440);
+                break;
+        
+            default:
+                break;
+        }
+        
+
+
+
+        Main.buttonClick.setVolume(effect_slider.getValue() / 100);
         Main.eatSound.setVolume(effect_slider.getValue() / 100);
     }
 
@@ -168,6 +204,16 @@ public class settingsController implements Initializable{
         else
             fullscreen_button.setImage(new Image("dependencies\\no.png"));
             
+
+        resolutions.getItems().addAll(
+            "800x600",
+            "1024x768",
+            "1280x720",
+            "1366x768",
+            "1920x1080",
+            "2560x1440"
+        );
+
         
 
         background.setBackground(new Background(new BackgroundImage(

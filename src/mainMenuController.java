@@ -103,6 +103,7 @@ public class mainMenuController implements Initializable{
                         Parent scene = new FXMLLoader(getClass().getResource("fxml/settings.fxml")).load();    
                         scene.getStylesheets().add(getClass().getResource("style\\slider-style.css").toExternalForm());
                         
+                        
                         Platform.runLater(() -> Main.stage.getScene().setRoot(scene));
                         break;
                         case "game":

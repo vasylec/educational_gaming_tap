@@ -22,7 +22,10 @@ public class Main extends Application{
     public static AudioClip eatSound, buttonClick;
     
 
-   
+   public static void setResolution(double width, double height){
+        Main.stage.setWidth(width);
+        Main.stage.setHeight(height);
+   }
 
     private void initializeSound(){
         try {
@@ -55,7 +58,6 @@ public class Main extends Application{
         Main.fullscreen = false;
 
         initializeSound();
-        
         
         
         
