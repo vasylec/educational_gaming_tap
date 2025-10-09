@@ -101,8 +101,6 @@ public class settingsController implements Initializable{
         Main.backgroundMusic.setVolume(audio_slider.getValue() / 100);
 
 
-        System.out.println(resolutions.getValue().toString());
-
         if(!resolutions.getValue().toString().equals(null))
         switch (resolutions.getValue().toString()) {
             case "800x600":
@@ -134,6 +132,7 @@ public class settingsController implements Initializable{
 
         Main.buttonClick.setVolume(effect_slider.getValue() / 100);
         Main.eatSound.setVolume(effect_slider.getValue() / 100);
+        Main.buttonClick.setVolume(effect_slider.getValue() / 100);
     }
 
     @FXML 
@@ -221,18 +220,7 @@ public class settingsController implements Initializable{
         resolutions.getItems().addAll(
             new ImageView(new Image("dependencies/video.png"))
         );
-        Platform.runLater(() -> {
-            resolutions.applyCss(); // forțează crearea skin-ului intern
-            Button arrowButton = (Button) resolutions.lookup(".arrow-button");
-            if (arrowButton != null) {
-                ImageView icon = new ImageView(new Image(getClass().getResource("/icons/drop_arrow.png").toExternalForm()));
-                icon.setFitWidth(14);
-                icon.setFitHeight(14);
-                arrowButton.setGraphic(icon);
-            } else {
-                System.out.println("⚠️ arrowButton not found yet");
-            }
-        });
+       
         
 
         background.setBackground(new Background(new BackgroundImage(
