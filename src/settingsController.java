@@ -10,10 +10,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -38,7 +38,16 @@ public class settingsController implements Initializable{
     @FXML
     private Slider audio_slider, effect_slider;
     @FXML
-    private ComboBox resolutions;
+    private ComboBox<ImageView> resolutions;
+
+    String[] resolutions_value = {
+        "800x600",
+        "1024x768",
+        "1280x720",
+        "1366x768",
+        "1920x1080",
+        "2560x1440"
+    };
     
 
     @FXML
@@ -205,15 +214,25 @@ public class settingsController implements Initializable{
             fullscreen_button.setImage(new Image("dependencies\\no.png"));
             
 
-        resolutions.getItems().addAll(
-            "800x600",
-            "1024x768",
-            "1280x720",
-            "1366x768",
-            "1920x1080",
-            "2560x1440"
-        );
+        
 
+        // resolutions.getItems().addAll(resolutions_value);
+
+        resolutions.getItems().addAll(
+            new ImageView(new Image("dependencies/video.png"))
+        );
+        Platform.runLater(() -> {
+            resolutions.applyCss(); // forțează crearea skin-ului intern
+            Button arrowButton = (Button) resolutions.lookup(".arrow-button");
+            if (arrowButton != null) {
+                ImageView icon = new ImageView(new Image(getClass().getResource("/icons/drop_arrow.png").toExternalForm()));
+                icon.setFitWidth(14);
+                icon.setFitHeight(14);
+                arrowButton.setGraphic(icon);
+            } else {
+                System.out.println("⚠️ arrowButton not found yet");
+            }
+        });
         
 
         background.setBackground(new Background(new BackgroundImage(
