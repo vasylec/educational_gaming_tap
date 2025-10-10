@@ -369,8 +369,8 @@ public class GameController{
         if (dxPrev == 0 && dxNext == 0)
         return "/dependencies/body-vertical.png";
 
-    // Segment orizontal (se mișcă doar pe axa X)
-    if (dyPrev == 0 && dyNext == 0)
+        // Segment orizontal (se mișcă doar pe axa X)
+        if (dyPrev == 0 && dyNext == 0)
         return "/dependencies/body-orizontal.png";
 
       
