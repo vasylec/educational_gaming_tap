@@ -58,22 +58,10 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        Main.stage = stage;
-        Main.fullscreen = false;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/mainStart.fxml"));
+        Parent root = loader.load();
 
-        stage.setFullScreenExitHint("");
-        initializeSound();
-
-
-        
-
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/mainMenu.fxml"));
-        root = loader.load();
-        Scene scene = new Scene(root, 1280, 720);
-
-        
-
+        Scene scene = new Scene(root, 400, 300);
         stage.setTitle("FXML Example");
         stage.setScene(scene);
         stage.show();
