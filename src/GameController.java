@@ -46,8 +46,17 @@ public class GameController{
 
     @FXML
     public void initialize() {
-        
-        
+        Main.stage.getScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                if (!Main.gamePaused) {
+                    timeline.pause();
+                    Main.gamePaused = true;
+                } else {
+                    timeline.play();
+                    Main.gamePaused = false;
+                }
+            }
+        });
 
         for(int i=0;i<36;i++){
             for(int j=0;j<20;j++){
@@ -77,7 +86,7 @@ public class GameController{
         rootPane.setFocusTraversable(true);
         javafx.application.Platform.runLater(() -> rootPane.requestFocus());
 
-        rootPane.setOnKeyPressed(event -> {
+        rootPane.setOnKeyPressed(event -> {            
             if (!directionChangedThisTick) {
                 KeyCode newDir = event.getCode();
                 if ((newDir == KeyCode.UP || newDir == KeyCode.DOWN || newDir == KeyCode.LEFT || newDir == KeyCode.RIGHT) && newDir != unvailableDirection) 

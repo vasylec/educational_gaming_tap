@@ -21,8 +21,9 @@ public class Main extends Application{
     public static String resolution;
 
     public static MediaPlayer backgroundMusic;
-    
     public static AudioClip eatSound, buttonClick;
+    
+    public static boolean gamePaused;
     
 
     public static void setResolution(double width, double height){
@@ -63,6 +64,7 @@ public class Main extends Application{
         initializeSound();
         Main.stage = stage;
         Main.stage.setFullScreenExitHint("");
+        gamePaused = false;
 
         
         
