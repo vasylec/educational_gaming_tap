@@ -59,7 +59,7 @@ public class GameController{
         snakeNodes.addHead(new Point2D(18, 11));
         
         
-        timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), _ -> tick()));
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.2), _ -> tick()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -357,18 +357,17 @@ public class GameController{
     if (dyPrev == 0 && dyNext == 0)
         return "/dependencies/body-orizontal.png";
 
-        // if (dxPrev == dxNext) return "/dependencies/body-vertical.png";
-        // if (dyPrev == dyNext) return "/dependencies/body-orizontal.png";
-
+      
+        
+        
         // Curbe
-        if ((dxPrev == -1 && dyNext == -1) || (dyPrev == -1 && dxNext == -1)) return "/dependencies/body-curve-left-down.png";
-        if ((dxPrev == 1 && dyNext == -1) || (dyPrev == -1 && dxNext == 1)) return "/dependencies/body-curve-left-up.png";
-        if ((dxPrev == -1 && dyNext == 1) || (dyPrev == 1 && dxNext == -1)) return "/dependencies/body-curve-down-right.png";
-        if ((dxPrev == 1 && dyNext == 1) || (dyPrev == 1 && dxNext == 1)) return "/dependencies/body-curve-up-right.png";
+        if ((dyPrev == -1 && dxNext == -1) || (dxPrev == 1 && dyNext == 1)) return "/dependencies/body-curve-left-down.png";
+        if ((dxPrev == 1 && dyNext == -1) || (dyPrev == 1 && dxNext == -1) ) return "/dependencies/body-curve-left-up.png";
+        if ((dxPrev == -1 && dyNext == 1) || (dyPrev == -1 && dxNext == 1)) return "/dependencies/body-curve-down-right.png";
+        if ((dyPrev == 1 && dxNext == 1) || (dxPrev == -1 && dyNext == -1)) return "/dependencies/body-curve-up-right.png";
 
         
-
-        //TODO
+        
 
        
 
