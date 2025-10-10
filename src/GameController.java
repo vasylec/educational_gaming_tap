@@ -51,7 +51,7 @@ public class GameController {
         snakeNodes.addHead(new Point2D(18, 11));
         
         
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1), _unused -> tick()));
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), _unused -> tick()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -87,7 +87,7 @@ public class GameController {
 
         appleGenerator();
 
-        switch(lastDirection){
+        switch(currentDirection){
             case UP ->{
                 unvailableDirection = KeyCode.DOWN;
             }
@@ -100,7 +100,9 @@ public class GameController {
             case LEFT ->{
                 unvailableDirection = KeyCode.RIGHT;
             }
-            
+            default ->{
+
+            }
         }
 
         if(currentDirection == unvailableDirection){
@@ -125,6 +127,9 @@ public class GameController {
                         else{
                             rootPane.getChildren().remove(appleImage);
                             applePoint = null;
+
+                            Main.eatSound.play();
+
                         }
 
                     }
@@ -145,6 +150,10 @@ public class GameController {
                         else{
                             rootPane.getChildren().remove(appleImage);
                             applePoint = null;
+
+                            Main.eatSound.play();
+
+                            
                         }
                     }
                 }
@@ -164,6 +173,9 @@ public class GameController {
                         else{
                             rootPane.getChildren().remove(appleImage);
                             applePoint = null;
+
+                            Main.eatSound.play();
+
                         }
                     }
                 }
@@ -183,6 +195,9 @@ public class GameController {
                         else{
                             rootPane.getChildren().remove(appleImage);
                             applePoint = null;
+
+                            Main.eatSound.play();
+
                         }
                     }
                 }
@@ -211,6 +226,8 @@ public class GameController {
     private void appleGenerator(){
 
         if(applePoint == null){
+
+        
 
             int row = random.nextInt(20);
             int col = random.nextInt(36);
@@ -339,6 +356,9 @@ public class GameController {
         if ((dxPrev == -1 && dyNext == 1) || (dyPrev == 1 && dxNext == -1)) return "/dependencies/body-curve-down-right.png";
         if ((dxPrev == 1 && dyNext == 1) || (dyPrev == 1 && dxNext == 1)) return "/dependencies/body-curve-up-right.png";
 
+        
+
+        //TODO
 
        
 
