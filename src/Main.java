@@ -1,5 +1,6 @@
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -60,6 +61,8 @@ public class Main extends Application{
     public void start(Stage stage) throws Exception {
         initializeSound();
         Main.stage = stage;
+        Main.stage.setFullScreenExitHint("");
+
         
         
         
@@ -72,6 +75,7 @@ public class Main extends Application{
         stage.show();
         stage.setWidth(800);
         stage.setHeight(600);
+        stage.setResizable(false);
         
         stage.show();        
     }

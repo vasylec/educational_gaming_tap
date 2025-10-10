@@ -1,16 +1,20 @@
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Random;
+import java.util.ResourceBundle;
 
-public class GameController {
+public class GameController{
 
     @FXML
     private AnchorPane rootPane;
@@ -34,8 +38,12 @@ public class GameController {
     private KeyCode unvailableDirection = KeyCode.RIGHT;
     private boolean directionChangedThisTick = false;
 
+    
+
     @FXML
     public void initialize() {
+        
+        
 
         for(int i=0;i<36;i++){
             for(int j=0;j<20;j++){
@@ -51,7 +59,7 @@ public class GameController {
         snakeNodes.addHead(new Point2D(18, 11));
         
         
-        timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), _unused -> tick()));
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), _ -> tick()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -76,10 +84,12 @@ public class GameController {
             }
             
         });
-
+        
     }
 
     private void tick() {
+        
+        
 
         directionChangedThisTick = false;
 
@@ -364,6 +374,8 @@ public class GameController {
 
         return "/dependencies/body-orizontal.png"; // fallback
     }
+
+    
 
 
 

@@ -108,10 +108,18 @@ public class mainMenuController implements Initializable{
                         
                         Platform.runLater(() -> Main.stage.getScene().setRoot(scene));
                         break;
+
                         case "game":
             
-            
-                            Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load()));
+                        Platform.runLater(() -> {
+                            try {                            
+                                Main.stage.getScene().setRoot(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            // Main.stage.setFullScreen(Main.fullscreen);
+                        });    
+                        
 
                          
                             
