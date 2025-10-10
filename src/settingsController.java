@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
@@ -12,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.image.Image;
@@ -24,6 +27,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 public class settingsController implements Initializable{
@@ -39,14 +43,15 @@ public class settingsController implements Initializable{
     private Slider audio_slider, effect_slider;
     @FXML
     private ComboBox<ImageView> resolutions;
+    
 
-    String[] resolutions_value = {
-        "800x600",
-        "1024x768",
-        "1280x720",
-        "1366x768",
-        "1920x1080",
-        "2560x1440"
+    ImageView[] resolutions_value = {
+        new ImageView(new Image("dependencies/800.png")),
+        new ImageView(new Image("dependencies/1024.png")),
+        new ImageView(new Image("dependencies/1280.png")),
+        new ImageView(new Image("dependencies/1366.png")),
+        new ImageView(new Image("dependencies/1920.png")),
+        new ImageView(new Image("dependencies/2560.png"))
     };
     
 
@@ -100,26 +105,29 @@ public class settingsController implements Initializable{
         Main.buttonClick.play();
         Main.backgroundMusic.setVolume(audio_slider.getValue() / 100);
 
+        String path = resolutions.getValue().getImage().getUrl();
+        String fileName = path.substring(path.lastIndexOf("/") + 1);
+        
+        // System.out.println(path.substring(path.lastIndexOf("/") + 1));
 
         if(!resolutions.getValue().toString().equals(null))
-        switch (resolutions.getValue().toString()) {
-            case "800x600":
+        switch (fileName) {
+            case "800.png":
                 Main.setResolution(800, 600);
                 break;
-            case "1024x768":
+            case "1024.png":
                 Main.setResolution(1024, 768);
-                
                 break;
-            case "1280x720":
+            case "1280.png":
                 Main.setResolution(1280, 720);
                 break;
-            case "1366x768":
+            case "1366.png":
                 Main.setResolution(1366, 768);
                 break;
-            case "1920x1080":
+            case "1920.png":
                 Main.setResolution(1920, 1080);
                 break;
-            case "2560x1440":
+            case "2560.png":
                 Main.setResolution(2560, 1440);
                 break;
         
@@ -212,15 +220,38 @@ public class settingsController implements Initializable{
         else
             fullscreen_button.setImage(new Image("dependencies\\no.png"));
             
+        resolutions.getItems().setAll(resolutions_value);
+        // resolutions.getItems().addAll(
+            // (Collection<? extends ImageView>) new ResolutionItems(0, null);
+        // );
+
+
+        resolutions.setCellFactory(new Callback<ListView<ImageView>, ListCell<ImageView>>() {
+            @Override
+            public ListCell<ImageView> call(ListView<ImageView> listView) {
+                return new ListCell<ImageView>() {
+                    @Override
+                    protected void updateItem(ImageView item, boolean empty) {
+                        super.updateItem(item, empty);
+                        
+                        if (empty || item == null) {
+                            setGraphic(null);
+                        } else {
+                            ImageView imageCopy = new ImageView(item.getImage());
+                            imageCopy.setFitWidth(100);
+                            imageCopy.setPreserveRatio(true);
+                            setGraphic(imageCopy);
+                        }
+                    }
+                };
+            }
+        });
+            
 
         
+            
+            
 
-        // resolutions.getItems().addAll(resolutions_value);
-
-        resolutions.getItems().addAll(
-            new ImageView(new Image("dependencies/video.png"))
-        );
-       
         
 
         background.setBackground(new Background(new BackgroundImage(

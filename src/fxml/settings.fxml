@@ -110,7 +110,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <ComboBox fx:id="resolutions" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: gray; -fx-border-radius: 10px; -fx-background-image: url(&quot;https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=&quot;); -fx-background-position: center; -fx-background-repeat: no-repeat; -fx-background-size: contain; fx-height: 50px;" stylesheets="@../style/combo-box.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="resolutions" prefHeight="50.0" prefWidth="200.0" stylesheets="@../style/combo-box.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
                               <Image url="@../dependencies/resolution-label.png" />
