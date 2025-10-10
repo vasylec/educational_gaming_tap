@@ -1,0 +1,32 @@
+/* === RETRO SNAKE SLIDER === */
+.slider {
+    -fx-padding: 8;
+}
+
+.slider .track {
+    -fx-background-color: #003300;          /* verde închis - fundal */
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;               /* colțuri drepte */
+    -fx-border-color: #00FF00;              /* verde fosforescent */
+    -fx-border-width: 2;
+    -fx-border-radius: 0;
+    -fx-pref-height: 10;
+}
+
+.slider .thumb {
+    -fx-background-color: #00FF00;          /* verde fosforescent */
+    -fx-border-color: #006600;              /* verde mai închis */
+    -fx-border-width: 2;
+    -fx-background-radius: 0;               /* pătrat */
+    -fx-pref-width: 16;
+    -fx-pref-height: 16;
+    -fx-effect: dropshadow(gaussian, #00FF00, 10, 0.3, 0, 0); /* glow verde */
+}
+
+.slider .thumb:hover {
+    -fx-background-color: #99FF99;          /* mai deschis la hover */
+}
+
+.slider .track:hover {
+    -fx-border-color: #99FF99;              /* ușor efect de hover */
+}
