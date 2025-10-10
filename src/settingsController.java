@@ -142,7 +142,7 @@ public class settingsController implements Initializable{
 
     @FXML 
     public void fullscreen_button_action(){
-        
+            Main.buttonClick.play();
         
         
             if(Main.fullscreen == false){

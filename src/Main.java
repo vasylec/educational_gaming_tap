@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -68,6 +69,8 @@ public class Main extends Application{
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/mainMenu.fxml"));
         root = loader.load();
+
+        
 
         Scene scene = new Scene(root, 400, 300);
         stage.setTitle("FXML Example");

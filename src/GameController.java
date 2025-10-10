@@ -7,6 +7,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -18,6 +19,9 @@ public class GameController{
 
     @FXML
     private AnchorPane rootPane;
+
+    @FXML
+    private Pane gameOverPane;
 
     @FXML
     private ImageView bgImage;
@@ -219,15 +223,18 @@ public class GameController{
     }
 
     private void gameOver() {
+        gameOverPane.setOpacity(1);
         timeline.stop();
 
-        javafx.application.Platform.runLater(() -> {
-            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-            alert.setTitle("Game Over");
-            alert.setHeaderText(null);
-            alert.setContentText("Ai pierdut jocul!");
-            alert.showAndWait();
-        });
+
+
+        // javafx.application.Platform.runLater(() -> {
+        //     javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+        //     alert.setTitle("Game Over");
+        //     alert.setHeaderText(null);
+        //     alert.setContentText("Ai pierdut jocul!");
+        //     alert.showAndWait();
+        // });
 
         System.out.println("Game over");
     }

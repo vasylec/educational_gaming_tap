@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -144,6 +145,26 @@ public class mainMenuController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         transition_for_enter().play();
+
+        Platform.runLater(() -> background.requestFocus());
+        background.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+
+            if(key == KeyCode.F11){
+
+                if(Main.fullscreen == false){
+                    Main.fullscreen = true;
+                    Main.stage.setFullScreen(Main.fullscreen);
+                }
+                else{
+                    Main.fullscreen = false;
+                    Main.stage.setFullScreen(Main.fullscreen);
+
+                }
+
+            }
+        });
+        
         
         BackgroundImage bgImage = new BackgroundImage(
             new Image("dependencies\\background.png"), 
@@ -155,7 +176,6 @@ public class mainMenuController implements Initializable{
 
         background.setBackground(new Background(bgImage));
 
-        // TODO: Implemnt play button
         play_button.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event arg0) {
