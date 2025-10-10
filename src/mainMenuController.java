@@ -109,11 +109,10 @@ public class mainMenuController implements Initializable{
                         Platform.runLater(() -> Main.stage.getScene().setRoot(scene));
                         break;
                         case "game":
-                            System.out.println("TEST5");
-                            Parent scene2 = new FXMLLoader(getClass().getResource("fxml/game.fxml")).load();    
             
             
-                            Platform.runLater(() -> Main.stage.getScene().setRoot(scene2));
+                            Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load()));
+
                          
                             
                         break;
