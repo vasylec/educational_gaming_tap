@@ -4,16 +4,24 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.Reader;
 import java.net.URL;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+
+import javax.xml.crypto.dsig.Manifest;
 
 public class GameController{
 
@@ -25,6 +33,9 @@ public class GameController{
 
     @FXML
     private ImageView bgImage;
+
+    @FXML
+    private Label scoreLabel;
 
     private Timeline timeline;
     private final double baseWidth = 1920;
@@ -42,12 +53,32 @@ public class GameController{
     private KeyCode unvailableDirection = KeyCode.RIGHT;
     private boolean directionChangedThisTick = false;
 
+    private boolean gameOver;    
+
+    public static int score, sessionScore;
+
+    @FXML
+    private void test(){
+        
+        
+    }
+
+    
     
 
     @FXML
     public void initialize() {
+        score = 0;
+        sessionScore = 0;
+        gameOver = false;
+        scoreLabel.setText("Score: 0");
+
+
+       
+
         
-        
+
+
 
         for(int i=0;i<36;i++){
             for(int j=0;j<20;j++){
@@ -63,7 +94,7 @@ public class GameController{
         snakeNodes.addHead(new Point2D(18, 11));
         
         
-        timeline = new Timeline(new KeyFrame(Duration.seconds(0.2), _ -> tick()));
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), _ -> tick()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -143,7 +174,8 @@ public class GameController{
                             applePoint = null;
 
                             Main.eatSound.play();
-
+                            score++;
+                            scoreLabel.setText("Score: "+score);
                         }
 
                     }
@@ -166,7 +198,8 @@ public class GameController{
                             applePoint = null;
 
                             Main.eatSound.play();
-
+                            score++;
+                            scoreLabel.setText("Score: "+score);
                             
                         }
                     }
@@ -189,7 +222,8 @@ public class GameController{
                             applePoint = null;
 
                             Main.eatSound.play();
-
+                            score++;
+                            scoreLabel.setText("Score: "+score);
                         }
                     }
                 }
@@ -211,7 +245,8 @@ public class GameController{
                             applePoint = null;
 
                             Main.eatSound.play();
-
+                            score++;
+                            scoreLabel.setText("Score: "+score);
                         }
                     }
                 }
@@ -223,9 +258,23 @@ public class GameController{
     }
 
     private void gameOver() {
+        sessionScore += score;
+        if(score > Main.databaseHighestScore)
+            Main.databaseHighestScore = score;
+        score = 0;
+        
+        Main.save();
+        
+        gameOver = true;    
+        snakeShowGraphics();
+        
+        Main.backgroundMusic.stop();
+        Main.deadSound.play();
+        
         gameOverPane.setOpacity(1);
         timeline.stop();
 
+        //TODO
 
 
         // javafx.application.Platform.runLater(() -> {
@@ -313,13 +362,26 @@ public class GameController{
 
             String imagePath = "";
 
-            if (i == 0) { // Coada
-                imagePath = getTailImage(current, next);
-            } else if (i == nodes.size() - 1) { // Cap
-                imagePath = getHeadImage(current, prev);
-            } else { // Corp
-                imagePath = getBodyImage(current, prev, next);
+            if(gameOver == false){
+                if (i == 0) { // Coada
+                    imagePath = getTailImage(current, next);
+                } else if (i == nodes.size() - 1) { // Cap
+                    imagePath = getHeadImage(current, prev);
+                } else { // Corp
+                    imagePath = getBodyImage(current, prev, next);
+                }
             }
+            else{
+                if (i == 0) { // Coada
+                    imagePath = getTailImage(current, next);
+                } else if (i == nodes.size() - 1) { // Cap
+                    imagePath = getDeadHeadImage(current, prev);
+                } else { // Corp
+                    imagePath = getBodyImage(current, prev, next);
+                }
+
+            }
+
 
             // Încarcă imaginea corect
             ImageView iv = new ImageView(new javafx.scene.image.Image(imagePath));
@@ -341,6 +403,15 @@ public class GameController{
         } else {
             return head.getX() < second.getX() ? "/dependencies/head-left.png" : "/dependencies/head-right.png";
         }
+    }
+    
+    private String getDeadHeadImage(SnakeNode head, SnakeNode second){
+        if (head.getX() == second.getX()) {
+            return head.getY() < second.getY() ? "/dependencies/head-up.gif" : "/dependencies/head-down.gif";
+        } else {
+            return head.getX() < second.getX() ? "/dependencies/head-left.gif" : "/dependencies/head-right.gif";
+        }
+
     }
 
     private String getTailImage(SnakeNode tail, SnakeNode second) {

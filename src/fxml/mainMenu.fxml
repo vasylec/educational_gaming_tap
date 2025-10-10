@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -53,6 +54,12 @@
                   <Image url="@../dependencies/title.png" />
                </image>
             </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="infoPanel" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="scoreLabel" text="Score:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Label fx:id="highestScoreLabel" layoutX="10.0" layoutY="10.0" text="Highest Score:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0" />
          </children>
       </AnchorPane>
    </children>

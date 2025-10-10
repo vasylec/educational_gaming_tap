@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SnakeNodeArray {
-    private final List<SnakeNode> nodes = new ArrayList<>();
+    private List<SnakeNode> nodes = new ArrayList<>();
 
     // Adaugă un nou cap (la sfârșitul listei)
     public void addHead(Point2D newHeadPosition) {
@@ -48,6 +48,10 @@ public class SnakeNodeArray {
     // Obține dimensiunea lanțului
     public int size() {
         return nodes.size();
+    }
+
+    public void clear() {
+        nodes = new ArrayList<>();
     }
 
 }

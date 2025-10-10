@@ -1,4 +1,9 @@
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +27,21 @@ public class Main extends Application{
 
     public static MediaPlayer backgroundMusic;
     
-    public static AudioClip eatSound, buttonClick;
+    public static AudioClip eatSound, buttonClick, deadSound;
+
+    public static int databaseScore, databaseHighestScore;
     
+    public static void save(){
+        try (BufferedWriter wr = new BufferedWriter(new FileWriter("src\\database\\scoreDatabase.txt"))){
+            wr.write((databaseScore + GameController.sessionScore) + "");
+            wr.newLine();
+            wr.write(databaseHighestScore + "");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void setResolution(double width, double height){
         Main.stage.setWidth(width);
@@ -39,13 +57,18 @@ public class Main extends Application{
 
     private void initializeSound(){
         try {
-            eatSound = new AudioClip(getClass().getResource("dependencies/sound/eat.wav").toExternalForm());
+            eatSound = new AudioClip(getClass().getResource("/dependencies/sound/eat.wav").toExternalForm());
             eatSound.setVolume(1.0);
             
-            buttonClick = new AudioClip(getClass().getResource("dependencies/sound/button_click.wav").toExternalForm());
+            buttonClick = new AudioClip(getClass().getResource("/dependencies/sound/button_click.wav").toExternalForm());
             buttonClick.setVolume(1.0);
 
-            backgroundMusic = new MediaPlayer(new Media(getClass().getResource("dependencies\\sound\\background.mp3").toExternalForm()));
+            deadSound = new AudioClip(getClass().getResource("/dependencies/sound/deadSound.wav").toExternalForm());
+            deadSound.setVolume(1.0);
+
+
+
+            backgroundMusic = new MediaPlayer(new Media(getClass().getResource("\\dependencies\\sound\\background.mp3").toExternalForm()));
             backgroundMusic.setVolume(1);
             backgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
             backgroundMusic.play();
@@ -64,10 +87,25 @@ public class Main extends Application{
         Main.stage = stage;
         Main.stage.setFullScreenExitHint("");
 
+        Main.stage.setOnCloseRequest(_ -> {
+            save();
+            Main.backgroundMusic.stop();
+        });
+
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\database\\scoreDatabase.txt"))) {
+            databaseScore = Integer.parseInt(br.readLine());
+            databaseHighestScore = Integer.parseInt(br.readLine());
+
+            System.out.println(databaseScore);
+            System.out.println(databaseHighestScore);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/mainMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
         root = loader.load();
 
         

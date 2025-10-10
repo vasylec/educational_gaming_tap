@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -30,46 +31,49 @@ public class mainMenuController implements Initializable{
     private ImageView play_button, settings_button, exit_button, inventory_button;
 
     @FXML
-    private AnchorPane fade;
+    private AnchorPane fade, infoPanel;
 
     @FXML
     private StackPane background;
 
     @FXML
+    private Label scoreLabel, highestScoreLabel;
+
+    @FXML
     private void play_button_pressed(){
-        play_button.setImage(new Image("dependencies\\play-pressed.png"));
+        play_button.setImage(new Image("\\dependencies\\play-pressed.png"));
     }
     @FXML
     private void play_button_released(){
-        play_button.setImage(new Image("dependencies\\play.png"));
+        play_button.setImage(new Image("\\dependencies\\play.png"));
         
     }
     @FXML
     private void settings_button_pressed(){
         
-        settings_button.setImage(new Image("dependencies\\settings-pressed.png"));
+        settings_button.setImage(new Image("\\dependencies\\settings-pressed.png"));
     }
     @FXML
     private void settings_button_released(){
-        settings_button.setImage(new Image("dependencies\\settings.png"));
+        settings_button.setImage(new Image("\\dependencies\\settings.png"));
         
     }
     @FXML
     private void exit_button_pressed(){
         
-        exit_button.setImage(new Image("dependencies\\exit-pressed.png"));
+        exit_button.setImage(new Image("\\dependencies\\exit-pressed.png"));
     }
     @FXML
     private void exit_button_released(){
-        exit_button.setImage(new Image("dependencies\\exit.png"));
+        exit_button.setImage(new Image("\\dependencies\\exit.png"));
     }
     @FXML
     private void inventory_button_pressed(){
-        inventory_button.setImage(new Image("dependencies\\inventory-pressed.png"));
+        inventory_button.setImage(new Image("\\dependencies\\inventory-pressed.png"));
     }
     @FXML
     private void inventory_button_released(){
-        inventory_button.setImage(new Image("dependencies\\inventory.png"));
+        inventory_button.setImage(new Image("\\dependencies\\inventory.png"));
 
     }
     
@@ -81,11 +85,16 @@ public class mainMenuController implements Initializable{
 
 
 
-    private FadeTransition transition_fade;
+    private FadeTransition transition_fade, transition_fade2;
     private FadeTransition transition_for_enter(){
         transition_fade = new FadeTransition(Duration.seconds(1), fade);
         transition_fade.setFromValue(0);
         transition_fade.setToValue(1);
+
+        transition_fade2 = new FadeTransition(Duration.seconds(1), infoPanel);
+        transition_fade2.setFromValue(0);
+        transition_fade2.setToValue(1);
+        transition_fade2.play();
 
         return transition_fade;
     }
@@ -95,6 +104,11 @@ public class mainMenuController implements Initializable{
         transition_fade = new FadeTransition(Duration.seconds(1), fade);
         transition_fade.setFromValue(1);
         transition_fade.setToValue(0);
+        
+        transition_fade2 = new FadeTransition(Duration.seconds(1), infoPanel);
+        transition_fade2.setFromValue(1);
+        transition_fade2.setToValue(0);
+
 
         transition_fade.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
@@ -103,8 +117,8 @@ public class mainMenuController implements Initializable{
                 try {
                     switch (where) {
                         case "settings":
-                        Parent scene = new FXMLLoader(getClass().getResource("fxml/settings.fxml")).load();    
-                        scene.getStylesheets().add(getClass().getResource("style/slider-style.css").toExternalForm());
+                        Parent scene = new FXMLLoader(getClass().getResource("/fxml/settings.fxml")).load();    
+                        scene.getStylesheets().add(getClass().getResource("/style/slider-style.css").toExternalForm());
                         
                         
                         Platform.runLater(() -> Main.stage.getScene().setRoot(scene));
@@ -114,7 +128,7 @@ public class mainMenuController implements Initializable{
             
                         Platform.runLater(() -> {
                             try {                            
-                                Main.stage.getScene().setRoot(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load());
+                                Main.stage.getScene().setRoot(new FXMLLoader(getClass().getResource("/fxml/game.fxml")).load());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -138,6 +152,7 @@ public class mainMenuController implements Initializable{
             }
         });
         
+        transition_fade2.play();
         return transition_fade;       
     }
 
@@ -145,6 +160,7 @@ public class mainMenuController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         transition_for_enter().play();
+        infoPanel.setMouseTransparent(true);
 
         Platform.runLater(() -> background.requestFocus());
         background.setOnKeyPressed(event -> {
@@ -164,10 +180,13 @@ public class mainMenuController implements Initializable{
 
             }
         });
+
+        scoreLabel.setText("Total Score: "+Main.databaseScore);
+        highestScoreLabel.setText("Highest Score: "+Main.databaseHighestScore);
         
         
         BackgroundImage bgImage = new BackgroundImage(
-            new Image("dependencies\\background.png"), 
+            new Image("\\dependencies\\background.png"), 
             BackgroundRepeat.NO_REPEAT, 
             BackgroundRepeat.NO_REPEAT, 
             BackgroundPosition.CENTER, 
