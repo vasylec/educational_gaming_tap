@@ -29,6 +29,8 @@ public class Main extends Application{
     
     public static AudioClip eatSound, buttonClick, deadSound;
 
+    public static boolean gamePaused;
+
     public static int databaseScore, databaseHighestScore;
     
     public static void save(){
@@ -42,6 +44,7 @@ public class Main extends Application{
             e.printStackTrace();
         }
     }
+    
 
     public static void setResolution(double width, double height){
         Main.stage.setWidth(width);
@@ -86,6 +89,8 @@ public class Main extends Application{
         initializeSound();
         Main.stage = stage;
         Main.stage.setFullScreenExitHint("");
+
+        gamePaused = false;
 
         Main.stage.setOnCloseRequest(_ -> {
             save();
