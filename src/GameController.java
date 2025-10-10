@@ -303,17 +303,17 @@ public class GameController {
 
     private String getHeadImage(SnakeNode head, SnakeNode second) {
         if (head.getX() == second.getX()) {
-            return head.getY() < second.getY() ? "/dependencies/snake_head_up.jpg" : "/dependencies/snake_head_down.jpg";
+            return head.getY() < second.getY() ? "/dependencies/head-up.png" : "/dependencies/head-down.png";
         } else {
-            return head.getX() < second.getX() ? "/dependencies/snake_head_left.jpg" : "/dependencies/snake_head_right.jpg";
+            return head.getX() < second.getX() ? "/dependencies/head-left.png" : "/dependencies/head-right.png";
         }
     }
 
     private String getTailImage(SnakeNode tail, SnakeNode second) {
         if (tail.getX() == second.getX()) {
-            return tail.getY() < second.getY() ? "/dependencies/snake_tail_up.jpg" : "/dependencies/snake_tail_down.jpg";
+            return tail.getY() < second.getY() ? "/dependencies/body-end-up.png" : "/dependencies/body-end-down.png";
         } else {
-            return tail.getX() < second.getX() ? "/dependencies/snake_tail_left.jpg" : "/dependencies/snake_tail_right.jpg";
+            return tail.getX() < second.getX() ? "/dependencies/body-end-left.png" : "/dependencies/body-end-right.png";
         }
     }
 
@@ -323,16 +323,26 @@ public class GameController {
         int dxNext = next.getX() - current.getX();
         int dyNext = next.getY() - current.getY();
 
-        if (dxPrev == dxNext) return "/dependencies/snake_body_vertical.jpg";
-        if (dyPrev == dyNext) return "/dependencies/snake_body_horizontal.jpg";
+        if (dxPrev == 0 && dxNext == 0)
+        return "/dependencies/body-vertical.png";
+
+    // Segment orizontal (se mișcă doar pe axa X)
+    if (dyPrev == 0 && dyNext == 0)
+        return "/dependencies/body-orizontal.png";
+
+        // if (dxPrev == dxNext) return "/dependencies/body-vertical.png";
+        // if (dyPrev == dyNext) return "/dependencies/body-orizontal.png";
 
         // Curbe
-        if ((dxPrev == -1 && dyNext == -1) || (dyPrev == -1 && dxNext == -1)) return "/dependencies/snake_curve_lu.jpg";
-        if ((dxPrev == 1 && dyNext == -1) || (dyPrev == -1 && dxNext == 1)) return "/dependencies/snake_curve_ru.jpg";
-        if ((dxPrev == -1 && dyNext == 1) || (dyPrev == 1 && dxNext == -1)) return "/dependencies/snake_curve_ld.jpg";
-        if ((dxPrev == 1 && dyNext == 1) || (dyPrev == 1 && dxNext == 1)) return "/dependencies/snake_curve_rd.jpg";
+        if ((dxPrev == -1 && dyNext == -1) || (dyPrev == -1 && dxNext == -1)) return "/dependencies/body-curve-left-down.png";
+        if ((dxPrev == 1 && dyNext == -1) || (dyPrev == -1 && dxNext == 1)) return "/dependencies/body-curve-left-up.png";
+        if ((dxPrev == -1 && dyNext == 1) || (dyPrev == 1 && dxNext == -1)) return "/dependencies/body-curve-down-right.png";
+        if ((dxPrev == 1 && dyNext == 1) || (dyPrev == 1 && dxNext == 1)) return "/dependencies/body-curve-up-right.png";
 
-        return "/dependencies/snake_body_horizontal.jpg"; // fallback
+
+       
+
+        return "/dependencies/body-orizontal.png"; // fallback
     }
 
 
