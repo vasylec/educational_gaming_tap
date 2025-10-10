@@ -90,6 +90,7 @@ public class mainMenuController implements Initializable{
     }
 
     private FadeTransition transition_for_exit(String where){
+        
         transition_fade = new FadeTransition(Duration.seconds(1), fade);
         transition_fade.setFromValue(1);
         transition_fade.setToValue(0);
@@ -97,6 +98,7 @@ public class mainMenuController implements Initializable{
         transition_fade.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
+                System.out.println("DEBUG");
                 try {
                     switch (where) {
                         case "settings":
@@ -107,14 +109,13 @@ public class mainMenuController implements Initializable{
                         Platform.runLater(() -> Main.stage.getScene().setRoot(scene));
                         break;
                         case "game":
-                            Platform.runLater(() -> {
-                                try {
-                                    Main.stage.setScene(new Scene(new FXMLLoader(getClass().getResource("fxml/game.fxml")).load(), 600, 400));
-                                } 
-                                catch (IOException e) {
-                                    e.printStackTrace();
-                                }    
-                            });
+                            System.out.println("TEST5");
+                            Parent scene2 = new FXMLLoader(getClass().getResource("fxml/game.fxml")).load();    
+            
+            
+                            Platform.runLater(() -> Main.stage.getScene().setRoot(scene2));
+                         
+                            
                         break;
                         case "exit":
                             Main.stage.close();
@@ -152,11 +153,11 @@ public class mainMenuController implements Initializable{
             @Override
             public void handle(Event arg0) {
                 Main.buttonClick.play();
+                
+                transition_for_exit("game").play();
+                
+                
 
-
-
-
-                // transition_for_exit(null).play();
             }
         });
         

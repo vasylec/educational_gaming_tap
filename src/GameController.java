@@ -233,7 +233,7 @@ public class GameController {
             double x = 60 * scaleX + col * realCellWidth;
             double y = 40 * scaleY + row * realCellHeight;
 
-            appleImage = new ImageView(new javafx.scene.image.Image("/dependencies/images (12).jpg"));
+            appleImage = new ImageView(new javafx.scene.image.Image("/dependencies/apple.png"));
             appleImage.setFitWidth(realCellWidth);
             appleImage.setFitHeight(realCellHeight);
             appleImage.setPreserveRatio(false);
