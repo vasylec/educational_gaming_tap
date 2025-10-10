@@ -1,13 +1,11 @@
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.transform.Scale;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -57,28 +55,6 @@ public class Main extends Application{
         }
     }
 
-    private void scaleRoot(Parent root, Scene scene) {
-    double baseWidth = 1280;
-    double baseHeight = 720;
-
-    // Calculăm raportul dintre dimensiunea actuală și cea de bază
-    double scaleX = scene.getWidth() / baseWidth;
-    double scaleY = scene.getHeight() / baseHeight;
-    double scale = Math.min(scaleX, scaleY); // păstrează proporțiile corecte
-
-    // Aplicăm scalarea uniformă
-    root.setScaleX(scale);
-    root.setScaleY(scale);
-
-    // 💡 Centrează conținutul (scapă de marginile albe)
-    double offsetX = (scene.getWidth() - baseWidth * scale) / 2;
-    double offsetY = (scene.getHeight() - baseHeight * scale) / 2;
-    root.setTranslateX(offsetX);
-    root.setTranslateY(offsetY);
-}
-
-    
-    
 
     @Override
     public void start(Stage stage) throws Exception {
