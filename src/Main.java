@@ -133,7 +133,7 @@ public class Main extends Application{
             e.printStackTrace();
         }
 
-        gameBgImage = new Image("dependencies\\snakes\\defaultSnake\\head-down.png");
+        gameBgImage = new Image("dependencies\\snakeGame.png");
         
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
@@ -148,7 +148,7 @@ public class Main extends Application{
         stage.setWidth(800);
         stage.setHeight(600);
         stage.setResizable(false);
-        stage.getIcons().add(gameBgImage);
+        stage.getIcons().add(new Image("dependencies\\snakes\\defaultSnake\\head-down.png"));
         
         stage.show();        
     }
