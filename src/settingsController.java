@@ -29,13 +29,13 @@ import javafx.util.Duration;
 
 public class settingsController implements Initializable{
     @FXML
-    private ImageView back_button, audio_button, video_button, apply_button, fullscreen_button;
+    private ImageView back_button, audio_button, video_button, apply_button, fullscreen_button, game_button, gridViewButton;
     @FXML
     private StackPane background;
     @FXML
     private BorderPane fade;
     @FXML
-    private GridPane video_pane, audio_pane;
+    private GridPane video_pane, audio_pane, game_pane;
     @FXML
     private Slider audio_slider, effect_slider;
     @FXML
@@ -94,6 +94,25 @@ public class settingsController implements Initializable{
             fullscreen_button.setImage(new Image("\\dependencies\\yes.png"));
         else
             fullscreen_button.setImage(new Image("\\dependencies\\no.png"));
+    }
+    @FXML
+    private void yes_no_button_pressed2(){    
+        gridViewButton.setImage(new Image("\\dependencies\\yes-no-pressed.png"));
+    }
+    @FXML
+    private void yes_no_button_released2(){
+        if(Main.gridView == true)
+            gridViewButton.setImage(new Image("\\dependencies\\yes.png"));
+        else
+            gridViewButton.setImage(new Image("\\dependencies\\no.png"));
+    }
+    @FXML
+    private void game_button_pressed(){
+        game_button.setImage(new Image("\\dependencies\\game-pressed.png"));
+    }
+    @FXML
+    private void game_button_released(){
+        game_button.setImage(new Image("\\dependencies\\game.png"));
     }
 
 
@@ -208,9 +227,12 @@ public class settingsController implements Initializable{
         audio_slider.setValue(Main.backgroundMusic.getVolume() * 100);
         effect_slider.setValue(Main.eatSound.getVolume() * 100);
         
-        video_pane.setOpacity(1);
-        video_button.setImage(new Image("\\dependencies\\video-pressed.png"));
+        game_button.setImage(new Image("\\dependencies\\game-pressed.png"));
+        video_pane.setOpacity(0);
         audio_pane.setOpacity(0);
+        game_pane.setOpacity(1);
+        gridViewButton.setImage(new Image("\\dependencies\\yes.png"));
+
 
         if(Main.fullscreen == true)
             fullscreen_button.setImage(new Image("\\dependencies\\yes.png"));
@@ -218,10 +240,7 @@ public class settingsController implements Initializable{
             fullscreen_button.setImage(new Image("\\dependencies\\no.png"));
             
         resolutions.getItems().setAll(resolutions_value);
-        // resolutions.getItems().addAll(
-            // (Collection<? extends ImageView>) new ResolutionItems(0, null);
-        // );
-
+        
 
         resolutions.setCellFactory(new Callback<ListView<ImageView>, ListCell<ImageView>>() {
             @Override
@@ -244,13 +263,6 @@ public class settingsController implements Initializable{
             }
         });
             
-
-        
-            
-            
-
-        
-
         background.setBackground(new Background(new BackgroundImage(
             new Image("\\dependencies\\background.png"), 
             BackgroundRepeat.NO_REPEAT, 
@@ -276,7 +288,10 @@ public class settingsController implements Initializable{
                 Main.buttonClick.play();
                 video_button.setImage(new Image("\\dependencies\\video-pressed.png"));
                 audio_button.setImage(new Image("\\dependencies\\audio.png"));
+                game_button.setImage(new Image("\\dependencies\\game.png"));
                 audio_pane.setOpacity(0);
+                game_pane.setOpacity(0);
+                game_pane.setMouseTransparent(true);
                 audio_pane.setMouseTransparent(true);
                 video_pane.setMouseTransparent(false);
                 video_pane.setOpacity(1);
@@ -289,13 +304,51 @@ public class settingsController implements Initializable{
                 Main.buttonClick.play();
                 video_button.setImage(new Image("\\dependencies\\video.png"));
                 audio_button.setImage(new Image("\\dependencies\\audio-pressed.png"));
+                game_button.setImage(new Image("\\dependencies\\game.png"));
+                game_pane.setOpacity(0);
                 video_pane.setOpacity(0);
+                game_pane.setMouseTransparent(true);
                 video_pane.setMouseTransparent(true);
                 audio_pane.setMouseTransparent(false);
                 audio_pane.setOpacity(1);
             }
         });
 
+        game_button.setOnMouseClicked(new EventHandler<Event>() {
+
+            @Override
+            public void handle(Event arg0) {
+                Main.buttonClick.play();
+                video_button.setImage(new Image("\\dependencies\\video.png"));
+                audio_button.setImage(new Image("\\dependencies\\audio.png"));
+                game_button.setImage(new Image("\\dependencies\\game-pressed.png"));
+                video_pane.setOpacity(0);
+                audio_pane.setOpacity(0);
+                video_pane.setMouseTransparent(true);
+                audio_pane.setMouseTransparent(true);
+                game_pane.setMouseTransparent(false);
+                game_pane.setOpacity(1);
+            }
+            
+        });
+
+        gridViewButton.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event arg0) {
+                
+                if(Main.gridView == true){
+                    Main.gameBgImage = new Image("\\dependencies\\snakeGame-no-grid.png");
+                    gridViewButton.setImage(new Image("\\dependencies\\no.png"));
+                    Main.gridView = false;
+                }
+                else{
+                    Main.gameBgImage = new Image("\\dependencies\\snakeGame.png");
+                    gridViewButton.setImage(new Image("\\dependencies\\yes.png"));
+                    Main.gridView = true;
+                }
+            
+            }
+        });
     }
     
 }

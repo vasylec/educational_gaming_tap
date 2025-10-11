@@ -52,10 +52,18 @@ public class GameController{
     private KeyCode lastDirection = KeyCode.RIGHT;
     private KeyCode unvailableDirection = KeyCode.RIGHT;
     private boolean directionChangedThisTick = false;
+    private int growth = 0;
 
     private boolean gameOver;    
 
     public static int score, sessionScore;
+
+    private String 
+    apple = "/dependencies/apple.png",
+    cherry = "/dependencies/cherry.png",
+    grapes = "/dependencies/grapes.png",
+    star = "/dependencies/star.png";
+    ;
 
     @FXML
     private void test(){
@@ -68,7 +76,7 @@ public class GameController{
 
     @FXML
     public void initialize() {
-        
+        bgImage.setImage(Main.gameBgImage);
         
         Main.stage.getScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
@@ -136,7 +144,23 @@ public class GameController{
 
         currentDirection = currentDirectionGeter;
 
-        appleGenerator();
+
+        double x = Math.random() * 100;
+
+        if(x < 5){
+            appleGenerator(star);
+        }
+        else if(x < 10){
+            appleGenerator(grapes);
+        }
+        else if(x < 30){
+            appleGenerator(cherry);
+        }
+        else{
+            appleGenerator(apple);
+        }
+
+        
 
         switch(currentDirection){
             case UP ->{
@@ -160,6 +184,8 @@ public class GameController{
             currentDirection = lastDirection;
         }
         
+        // TODO: GROWTH
+
         switch (currentDirection) {
                 case UP -> {
                     if((snakeNodes.getHeadPosition().getY()-1<0) || (matrix[(int)snakeNodes.getHeadPosition().getX()][(int)snakeNodes.getHeadPosition().getY()-1]==1)){
@@ -172,15 +198,46 @@ public class GameController{
                         snakeNodes.addHead(new Point2D((int)snakeNodes.getHeadPosition().getX(), (int)snakeNodes.getHeadPosition().getY()-1));
 
                         if(!snakeNodes.getHeadPosition().equals(applePoint)){
-                            matrix[(int)snakeNodes.getTailPosition().getX()][(int)snakeNodes.getTailPosition().getY()] = 0;
-                            snakeNodes.removeTail();
+                            
+                            if(growth > 0){
+                                growth--;
+                            }
+                            else{
+                                matrix[(int)snakeNodes.getTailPosition().getX()][(int)snakeNodes.getTailPosition().getY()] = 0;
+                                snakeNodes.removeTail();       
+                            }
                         }
                         else{
+                            
+
+
+                            String path = appleImage.getImage().getUrl();
+                            String fileName = path.substring(path.lastIndexOf("/") + 1);
+
+                            if(fileName.equals("apple.png")){
+                                score++;
+                            }
+                            else if(fileName.equals("cherry.png")){
+                                score += 3;
+                                growth += 2;
+                            }
+                            else if(fileName.equals("grapes.png")){
+                                score += 5;
+                                growth += 4;
+                            }
+                            else if(fileName.equals("star.png")){
+                                score += 50;
+                                growth += 49;    
+                            }
+
+
+
+
+
                             rootPane.getChildren().remove(appleImage);
                             applePoint = null;
 
                             Main.eatSound.play();
-                            score++;
                             scoreLabel.setText("Score: "+score);
                         }
 
@@ -196,15 +253,39 @@ public class GameController{
                         snakeNodes.addHead(new Point2D((int)snakeNodes.getHeadPosition().getX(), (int)snakeNodes.getHeadPosition().getY()+1));
 
                         if(!snakeNodes.getHeadPosition().equals(applePoint)){
-                            matrix[(int)snakeNodes.getTailPosition().getX()][(int)snakeNodes.getTailPosition().getY()] = 0;
-                            snakeNodes.removeTail();
+                            if(growth > 0){
+                                growth--;
+                            }
+                            else{
+                                matrix[(int)snakeNodes.getTailPosition().getX()][(int)snakeNodes.getTailPosition().getY()] = 0;
+                                snakeNodes.removeTail();
+                            }
                         }
                         else{
+                            String path = appleImage.getImage().getUrl();
+                            String fileName = path.substring(path.lastIndexOf("/") + 1);
+
+                            if(fileName.equals("apple.png")){
+                                score++;
+                            }
+                            else if(fileName.equals("cherry.png")){
+                                score += 3;
+                                growth += 2;
+                            }
+                            else if(fileName.equals("grapes.png")){
+                                score += 5;
+                                growth += 4;
+                            }
+                            else if(fileName.equals("star.png")){
+                                score += 50;
+                                growth += 49;    
+                            }
+                            
+                            
                             rootPane.getChildren().remove(appleImage);
                             applePoint = null;
 
                             Main.eatSound.play();
-                            score++;
                             scoreLabel.setText("Score: "+score);
                             
                         }
@@ -220,15 +301,38 @@ public class GameController{
                         snakeNodes.addHead(new Point2D((int)snakeNodes.getHeadPosition().getX()-1, (int)snakeNodes.getHeadPosition().getY()));
 
                         if(!snakeNodes.getHeadPosition().equals(applePoint)){
-                            matrix[(int)snakeNodes.getTailPosition().getX()][(int)snakeNodes.getTailPosition().getY()] = 0;
-                            snakeNodes.removeTail();
+                            if(growth > 0){
+                                growth--;
+                            }
+                            else{
+                                matrix[(int)snakeNodes.getTailPosition().getX()][(int)snakeNodes.getTailPosition().getY()] = 0;
+                                snakeNodes.removeTail();
+                            }
                         }
                         else{
+                            String path = appleImage.getImage().getUrl();
+                            String fileName = path.substring(path.lastIndexOf("/") + 1);
+
+                            if(fileName.equals("apple.png")){
+                                score++;
+                            }
+                            else if(fileName.equals("cherry.png")){
+                                score += 3;
+                                growth += 2;
+                            }
+                            else if(fileName.equals("grapes.png")){
+                                score += 5;
+                                growth += 4;
+                            }
+                            else if(fileName.equals("star.png")){
+                                score += 50;
+                                growth += 49;    
+                            }
+                            
                             rootPane.getChildren().remove(appleImage);
                             applePoint = null;
 
                             Main.eatSound.play();
-                            score++;
                             scoreLabel.setText("Score: "+score);
                         }
                     }
@@ -243,15 +347,38 @@ public class GameController{
                         snakeNodes.addHead(new Point2D((int)snakeNodes.getHeadPosition().getX()+1, (int)snakeNodes.getHeadPosition().getY()));
 
                         if(!snakeNodes.getHeadPosition().equals(applePoint)){
-                            matrix[(int)snakeNodes.getTailPosition().getX()][(int)snakeNodes.getTailPosition().getY()] = 0;
-                            snakeNodes.removeTail();
+                            if(growth > 0){
+                                growth--;
+                            }
+                            else{
+                                matrix[(int)snakeNodes.getTailPosition().getX()][(int)snakeNodes.getTailPosition().getY()] = 0;
+                                snakeNodes.removeTail();
+                            }
                         }
                         else{
+                            String path = appleImage.getImage().getUrl();
+                            String fileName = path.substring(path.lastIndexOf("/") + 1);
+
+                            if(fileName.equals("apple.png")){
+                                score++;
+                            }
+                            else if(fileName.equals("cherry.png")){
+                                score += 3;
+                                growth += 2;
+                            }
+                            else if(fileName.equals("grapes.png")){
+                                score += 5;
+                                growth += 4;
+                            }
+                            else if(fileName.equals("star.png")){
+                                score += 50;
+                                growth += 49;    
+                            }
+                            
                             rootPane.getChildren().remove(appleImage);
                             applePoint = null;
 
                             Main.eatSound.play();
-                            score++;
                             scoreLabel.setText("Score: "+score);
                         }
                     }
@@ -280,7 +407,7 @@ public class GameController{
         gameOverPane.setOpacity(1);
         timeline.stop();
 
-        //TODO
+        //TODO: Game Over
 
 
         // javafx.application.Platform.runLater(() -> {
@@ -295,7 +422,7 @@ public class GameController{
     }
 
 
-    private void appleGenerator(){
+    private void appleGenerator(String appleSkin){
 
         if(applePoint == null){
 
@@ -322,7 +449,7 @@ public class GameController{
             double x = 60 * scaleX + col * realCellWidth;
             double y = 40 * scaleY + row * realCellHeight;
 
-            appleImage = new ImageView(new javafx.scene.image.Image("/dependencies/apple.png"));
+            appleImage = new ImageView(new javafx.scene.image.Image(appleSkin));
             appleImage.setFitWidth(realCellWidth);
             appleImage.setFitHeight(realCellHeight);
             appleImage.setPreserveRatio(false);
@@ -405,26 +532,26 @@ public class GameController{
 
     private String getHeadImage(SnakeNode head, SnakeNode second) {
         if (head.getX() == second.getX()) {
-            return head.getY() < second.getY() ? "/dependencies/head-up.png" : "/dependencies/head-down.png";
+            return head.getY() < second.getY() ? Main.selectedSkin.getHead_up() : Main.selectedSkin.getHead_down();
         } else {
-            return head.getX() < second.getX() ? "/dependencies/head-left.png" : "/dependencies/head-right.png";
+            return head.getX() < second.getX() ? Main.selectedSkin.getHead_left() : Main.selectedSkin.getHead_right();
         }
     }
     
     private String getDeadHeadImage(SnakeNode head, SnakeNode second){
         if (head.getX() == second.getX()) {
-            return head.getY() < second.getY() ? "/dependencies/head-up.gif" : "/dependencies/head-down.gif";
+            return head.getY() < second.getY() ? Main.selectedSkin.getDead_head_up() : Main.selectedSkin.getDead_head_down();
         } else {
-            return head.getX() < second.getX() ? "/dependencies/head-left.gif" : "/dependencies/head-right.gif";
+            return head.getX() < second.getX() ? Main.selectedSkin.getDead_head_left() : Main.selectedSkin.getDead_head_right();
         }
 
     }
 
     private String getTailImage(SnakeNode tail, SnakeNode second) {
         if (tail.getX() == second.getX()) {
-            return tail.getY() < second.getY() ? "/dependencies/body-end-up.png" : "/dependencies/body-end-down.png";
+            return tail.getY() < second.getY() ? Main.selectedSkin.getBody_end_up() : Main.selectedSkin.getBody_end_down();
         } else {
-            return tail.getX() < second.getX() ? "/dependencies/body-end-left.png" : "/dependencies/body-end-right.png";
+            return tail.getX() < second.getX() ? Main.selectedSkin.getBody_end_left() : Main.selectedSkin.getBody_end_right();
         }
     }
 
@@ -435,27 +562,27 @@ public class GameController{
         int dyNext = next.getY() - current.getY();
 
         if (dxPrev == 0 && dxNext == 0)
-        return "/dependencies/body-vertical.png";
+        return Main.selectedSkin.getVertical_body();
 
         // Segment orizontal (se mișcă doar pe axa X)
         if (dyPrev == 0 && dyNext == 0)
-        return "/dependencies/body-orizontal.png";
+        return Main.selectedSkin.getHorizontal_body();
 
       
         
         
         // Curbe
-        if ((dyPrev == -1 && dxNext == -1) || (dxPrev == 1 && dyNext == 1)) return "/dependencies/body-curve-left-down.png";
-        if ((dxPrev == 1 && dyNext == -1) || (dyPrev == 1 && dxNext == -1) ) return "/dependencies/body-curve-left-up.png";
-        if ((dxPrev == -1 && dyNext == 1) || (dyPrev == -1 && dxNext == 1)) return "/dependencies/body-curve-down-right.png";
-        if ((dyPrev == 1 && dxNext == 1) || (dxPrev == -1 && dyNext == -1)) return "/dependencies/body-curve-up-right.png";
+        if ((dyPrev == -1 && dxNext == -1) || (dxPrev == 1 && dyNext == 1)) return Main.selectedSkin.getBody_curve_ld();
+        if ((dxPrev == 1 && dyNext == -1) || (dyPrev == 1 && dxNext == -1) ) return Main.selectedSkin.getBody_curve_lu();
+        if ((dxPrev == -1 && dyNext == 1) || (dyPrev == -1 && dxNext == 1)) return Main.selectedSkin.getBody_curve_rd();
+        if ((dyPrev == 1 && dxNext == 1) || (dxPrev == -1 && dyNext == -1)) return Main.selectedSkin.getBody_curve_ru();
 
         
         
 
        
 
-        return "/dependencies/body-orizontal.png"; // fallback
+        return Main.selectedSkin.getHorizontal_body(); // fallback
     }
 
     

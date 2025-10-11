@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <StackPane fx:id="background" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainMenuController">
    <children>
@@ -58,8 +59,14 @@
       </AnchorPane>
       <AnchorPane fx:id="infoPanel" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Label fx:id="scoreLabel" text="Score:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Label fx:id="highestScoreLabel" layoutX="10.0" layoutY="10.0" text="Highest Score:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0" />
+            <Label fx:id="scoreLabel" text="Score:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="ROGFontsv1.6-Regular" size="24.0" />
+               </font></Label>
+            <Label fx:id="highestScoreLabel" layoutX="10.0" layoutY="10.0" text="Highest Score:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0">
+               <font>
+                  <Font name="ROGFontsv1.6-Regular" size="24.0" />
+               </font></Label>
          </children>
       </AnchorPane>
    </children>

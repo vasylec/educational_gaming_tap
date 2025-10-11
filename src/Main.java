@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
@@ -20,7 +21,6 @@ public class Main extends Application{
     public static Stage stage;
     public static Parent root;
 
-
     public static Double audio;
     public static boolean fullscreen;
     public static String resolution;
@@ -29,10 +29,31 @@ public class Main extends Application{
     
     public static AudioClip eatSound, buttonClick, deadSound;
 
-    public static boolean gamePaused;
+    public static boolean gamePaused, gridView;
 
     public static int databaseScore, databaseHighestScore;
-    
+
+    public static SnakeSkin defaultSkin,redSkin;
+    public static SnakeSkin selectedSkin;
+
+    public static Image gameBgImage;
+
+
+    private void loadSkins(){
+        defaultSkin = new SnakeSkin("\\dependencies\\snakes\\defaultSnake\\body-orizontal.png","\\dependencies\\snakes\\defaultSnake\\body-vertical.png",
+        "\\dependencies\\snakes\\defaultSnake\\body-curve-left-up.png","\\dependencies\\snakes\\defaultSnake\\body-curve-up-right.png","\\dependencies\\snakes\\defaultSnake\\body-curve-left-down.png","\\dependencies\\snakes\\defaultSnake\\body-curve-down-right.png",
+        "\\dependencies\\snakes\\defaultSnake\\body-end-up.png","\\dependencies\\snakes\\defaultSnake\\body-end-down.png","\\dependencies\\snakes\\defaultSnake\\body-end-left.png","\\dependencies\\snakes\\defaultSnake\\body-end-right.png",
+        "\\dependencies\\snakes\\defaultSnake\\head-up.png","\\dependencies\\snakes\\defaultSnake\\head-down.png","\\dependencies\\snakes\\defaultSnake\\head-left.png","\\dependencies\\snakes\\defaultSnake\\head-right.png",
+        "\\dependencies\\snakes\\defaultSnake\\head-up.gif","\\dependencies\\snakes\\defaultSnake\\head-down.gif","\\dependencies\\snakes\\defaultSnake\\head-left.gif","\\dependencies\\snakes\\defaultSnake\\head-right.gif");
+        
+        redSkin = new SnakeSkin("\\dependencies\\snakes\\redSnake\\body-orizontal.png","\\dependencies\\snakes\\redSnake\\body-vertical.png",
+        "\\dependencies\\snakes\\redSnake\\body-curve-left-up.png","\\dependencies\\snakes\\redSnake\\body-curve-up-right.png","\\dependencies\\snakes\\redSnake\\body-curve-left-down.png","\\dependencies\\snakes\\redSnake\\body-curve-down-right.png",
+        "\\dependencies\\snakes\\redSnake\\body-end-up.png","\\dependencies\\snakes\\redSnake\\body-end-down.png","\\dependencies\\snakes\\redSnake\\body-end-left.png","\\dependencies\\snakes\\redSnake\\body-end-right.png",
+        "\\dependencies\\snakes\\redSnake\\head-up.png","\\dependencies\\snakes\\redSnake\\head-down.png","\\dependencies\\snakes\\redSnake\\head-left.png","\\dependencies\\snakes\\redSnake\\head-right.png",
+        "\\dependencies\\snakes\\redSnake\\head-up.gif","\\dependencies\\snakes\\redSnake\\head-down.gif","\\dependencies\\snakes\\redSnake\\head-left.gif","\\dependencies\\snakes\\redSnake\\head-right.gif");
+        
+    }
+
     public static void save(){
         try (BufferedWriter wr = new BufferedWriter(new FileWriter("src\\database\\scoreDatabase.txt"))){
             wr.write((databaseScore + GameController.sessionScore) + "");
@@ -87,10 +108,13 @@ public class Main extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         initializeSound();
+        loadSkins();
+        Main.selectedSkin = Main.redSkin;
         Main.stage = stage;
         Main.stage.setFullScreenExitHint("");
 
         gamePaused = false;
+        gridView = true;
 
         Main.stage.setOnCloseRequest(_ -> {
             save();
@@ -108,6 +132,8 @@ public class Main extends Application{
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        gameBgImage = new Image("dependencies\\snakes\\defaultSnake\\head-down.png");
         
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
@@ -116,12 +142,13 @@ public class Main extends Application{
         
 
         Scene scene = new Scene(root, 400, 300);
-        stage.setTitle("FXML Example");
+        stage.setTitle("Snake Game");
         stage.setScene(scene);
         stage.show();
         stage.setWidth(800);
         stage.setHeight(600);
         stage.setResizable(false);
+        stage.getIcons().add(gameBgImage);
         
         stage.show();        
     }

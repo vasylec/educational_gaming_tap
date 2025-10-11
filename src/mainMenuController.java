@@ -113,7 +113,6 @@ public class mainMenuController implements Initializable{
         transition_fade.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
-                System.out.println("DEBUG");
                 try {
                     switch (where) {
                         case "settings":

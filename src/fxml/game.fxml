@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
 
@@ -15,7 +16,10 @@
                 <Image url="@../dependencies/snakeGame.png" />
             </image>
         </ImageView>
-      <Label fx:id="scoreLabel" text="Label" />
+      <Label fx:id="scoreLabel" layoutX="14.0" layoutY="-14.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0" prefWidth="888.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="-14.0">
+         <font>
+            <Font name="ROGFontsv1.6-Regular" size="40.0" />
+         </font></Label>
       <Pane fx:id="gameOverPane" layoutX="110.0" layoutY="102.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="102.0">
          <children>
             <Button mnemonicParsing="false" onAction="#test" text="Button" />
