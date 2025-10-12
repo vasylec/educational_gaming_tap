@@ -64,7 +64,7 @@ public class ShopController implements Initializable {
         items.sort((a, b) -> a.getDisplayName().compareToIgnoreCase(b.getDisplayName()));
         shopList.setItems(items);
         shopList.setPlaceholder(new Label("Nu sunt disponibile skinuri."));
-        shopList.setCellFactory(listView -> new ShopCell());
+        shopList.setCellFactory(_ -> new ShopCell());
     }
 
     private void refreshCoins() {
@@ -112,7 +112,7 @@ public class ShopController implements Initializable {
             preview.setPreserveRatio(true);
             HBox.setHgrow(nameLabel, Priority.ALWAYS);
             actionButton.getStyleClass().add("primary-button");
-            actionButton.setOnAction(event -> {
+            actionButton.setOnAction(_ -> {
                 SkinDefinition skin = getItem();
                 if (skin == null) {
                     return;
@@ -121,18 +121,18 @@ public class ShopController implements Initializable {
                 if (!skin.isUnlocked()) {
                     boolean unlocked = Main.unlockSkin(skin.getId());
                     if (unlocked) {
-                        statusLabel.setText("Ai cumpărat skinul " + skin.getDisplayName() + "!");
+                        statusLabel.setText("You bought skin: " + skin.getDisplayName() + "!");
                         refreshCoins();
                         shopList.refresh();
                     } else {
-                        statusLabel.setText("Monede insuficiente pentru " + skin.getDisplayName() + ".");
+                        statusLabel.setText("Insufficient coins: " + skin.getDisplayName() + ".");
                     }
                 } else if (skin.getId().equals(Main.selectedSkinId)) {
-                    statusLabel.setText("Skinul " + skin.getDisplayName() + " este deja activ.");
+                    statusLabel.setText("Skin: " + skin.getDisplayName() + " is already used.");
                 } else {
                     boolean selected = Main.selectSkin(skin.getId());
                     if (selected) {
-                        statusLabel.setText("Skin selectat: " + skin.getDisplayName());
+                        statusLabel.setText("Selected skin: " + skin.getDisplayName());
                         shopList.refresh();
                     }
                 }
@@ -151,18 +151,18 @@ public class ShopController implements Initializable {
             preview.setImage(image);
 
             nameLabel.setText(skin.getDisplayName());
-            priceLabel.setText("Preț: " + skin.getPrice());
+            priceLabel.setText("Price: " + skin.getPrice());
 
             if (skin.isUnlocked()) {
                 if (skin.getId().equals(Main.selectedSkinId)) {
-                    actionButton.setText("Echipat");
+                    actionButton.setText("Hey, you are using this skin");
                     actionButton.setDisable(true);
                 } else {
-                    actionButton.setText("Echipează");
+                    actionButton.setText("USE");
                     actionButton.setDisable(false);
                 }
             } else {
-                actionButton.setText("Cumpără");
+                actionButton.setText("BUY");
                 boolean canAfford = Main.coins >= skin.getPrice();
                 actionButton.setDisable(!canAfford);
             }

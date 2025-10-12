@@ -328,7 +328,7 @@ public class Main extends Application {
         gamePaused = false;
         gridView = true;
 
-        Main.stage.setOnCloseRequest(event -> {
+        Main.stage.setOnCloseRequest(_ -> {
             save();
             if (Main.backgroundMusic != null) {
                 Main.backgroundMusic.stop();

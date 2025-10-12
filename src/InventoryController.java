@@ -19,11 +19,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 public class InventoryController implements Initializable {
@@ -68,7 +66,7 @@ public class InventoryController implements Initializable {
         items.sort((a, b) -> a.getDisplayName().compareToIgnoreCase(b.getDisplayName()));
         skinList.setItems(items);
         skinList.setPlaceholder(new Label("Nu există skinuri de afișat."));
-        skinList.setCellFactory(listView -> new SkinCell());
+        skinList.setCellFactory(_ -> new SkinCell());
     }
 
     private void refreshCoins() {
@@ -127,8 +125,8 @@ public class InventoryController implements Initializable {
     private class SkinCell extends ListCell<SkinDefinition> {
         private final ImageView preview = new ImageView();
         private final Label nameLabel = new Label();
-        private final Button equipButton = new Button("Echipează");
-        private final Label equippedLabel = new Label("Echipat");
+        private final Button equipButton = new Button("USE");
+        private final Label equippedLabel = new Label("");
         private final HBox layout = new HBox(16, preview, nameLabel, equippedLabel, equipButton);
 
         SkinCell() {
@@ -139,7 +137,7 @@ public class InventoryController implements Initializable {
             equippedLabel.getStyleClass().add("equipped-label");
             equipButton.getStyleClass().add("primary-button");
             HBox.setHgrow(nameLabel, Priority.ALWAYS);
-            equipButton.setOnAction(event -> {
+            equipButton.setOnAction(_ -> {
                 SkinDefinition skin = getItem();
                 if (skin == null) {
                     return;
@@ -148,6 +146,8 @@ public class InventoryController implements Initializable {
                 boolean changed = Main.selectSkin(skin.getId());
                 if (changed) {
                     // statusLabel.setText("Skin selectat: " + skin.getDisplayName());
+                
+
                     updateSelectedLabel();
                     refreshCoins();
                     skinList.refresh();
@@ -163,6 +163,15 @@ public class InventoryController implements Initializable {
             if (empty || skin == null) {
                 setGraphic(null);
                 return;
+            }
+
+            if (skin.getId().equals(Main.selectedSkinId)) {
+                equipButton.setText("Hey, you are using this skin");
+                equipButton.setDisable(true);
+            }
+            else{
+                equipButton.setText("USE");
+                equipButton.setDisable(false);
             }
 
             Image previewImage = new Image(skin.getPreviewImagePath(), true);

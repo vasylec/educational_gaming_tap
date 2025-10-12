@@ -148,15 +148,15 @@ public class GameController{
         
         switch (Main.speed) {
             case 1:
-                timeline = new Timeline(new KeyFrame(Duration.seconds(0.4), event -> tick()));
+                timeline = new Timeline(new KeyFrame(Duration.seconds(0.4), _ -> tick()));
             
                 break;
             case 2:
-                timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), event -> tick()));
+                timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), _ -> tick()));
             
                 break;
             case 3:
-                timeline = new Timeline(new KeyFrame(Duration.seconds(0.05), event -> tick()));
+                timeline = new Timeline(new KeyFrame(Duration.seconds(0.05), _ -> tick()));
                 
                 break;
         
@@ -237,8 +237,6 @@ public class GameController{
         if(currentDirection == unvailableDirection){
             currentDirection = lastDirection;
         }
-        
-        // TODO: GROWTH
 
         switch (currentDirection) {
                 case UP -> {
@@ -360,18 +358,6 @@ public class GameController{
         gameOverPane.setMouseTransparent(false);
         gameOverPane.toFront();
         timeline.stop();
-
-        //TODO: Game Over
-
-
-        // javafx.application.Platform.runLater(() -> {
-        //     javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-        //     alert.setTitle("Game Over");
-        //     alert.setHeaderText(null);
-        //     alert.setContentText("Ai pierdut jocul!");
-        //     alert.showAndWait();
-        // });
-
         System.out.println("Game over");
     }
 
@@ -416,19 +402,17 @@ public class GameController{
         
     }
 
-    private void snakeShow(){
+    // private void snakeShow(){
 
-        System.out.println(currentDirection);
-        for (int y = 0; y < 20; y++) {       
-            for (int x = 0; x < 36; x++) {   
-                System.out.print(matrix[x][y] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println("tick");
-
-        
-    }
+    //     System.out.println(currentDirection);
+    //     for (int y = 0; y < 20; y++) {       
+    //         for (int x = 0; x < 36; x++) {   
+    //             System.out.print(matrix[x][y] + " ");
+    //         }
+    //         System.out.println();
+    //     }
+    //     System.out.println("tick");
+    // }
 
     private void setupGridOverlay() {
         if (gridCanvas == null) {
@@ -438,8 +422,8 @@ public class GameController{
         gridCanvas.setMouseTransparent(true);
         gridCanvas.widthProperty().bind(rootPane.widthProperty());
         gridCanvas.heightProperty().bind(rootPane.heightProperty());
-        gridCanvas.widthProperty().addListener((obs, oldVal, newVal) -> refreshGrid());
-        gridCanvas.heightProperty().addListener((obs, oldVal, newVal) -> refreshGrid());
+        gridCanvas.widthProperty().addListener((_, _, _) -> refreshGrid());
+        gridCanvas.heightProperty().addListener((_, _, _) -> refreshGrid());
         Platform.runLater(this::refreshGrid);
     }
 
