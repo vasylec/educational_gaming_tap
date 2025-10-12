@@ -2,8 +2,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.Parent;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -11,17 +14,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.Reader;
-import java.net.URL;
+import java.io.IOException;
+
 import java.util.List;
 import java.util.Random;
-import java.util.ResourceBundle;
 
-import javax.xml.crypto.dsig.Manifest;
+import javafx.scene.paint.Color;
 
 public class GameController{
 
@@ -29,10 +27,13 @@ public class GameController{
     private AnchorPane rootPane;
 
     @FXML
-    private Pane gameOverPane;
+    private Pane gameOverPane, pausePane;
 
     @FXML
     private ImageView bgImage;
+
+    @FXML
+    private Canvas gridCanvas;
 
     @FXML
     private Label scoreLabel;
@@ -56,7 +57,7 @@ public class GameController{
 
     private boolean gameOver;    
 
-    public static int score, sessionScore;
+    public static int score;
 
     private String 
     apple = "/dependencies/apple.png",
@@ -66,9 +67,38 @@ public class GameController{
     ;
 
     @FXML
-    private void test(){
-        
-        
+    private void handleRestart(){
+        if (!gameOver) {
+            return;
+        }
+        if (Main.buttonClick != null) {
+            Main.buttonClick.play();
+        }
+        timeline.stop();
+        switchScene("/fxml/game.fxml");
+    }
+
+    @FXML
+    private void handleBackToMenu(){
+        if (Main.buttonClick != null) {
+            Main.buttonClick.play();
+        }
+        timeline.stop();
+        switchScene("/fxml/mainMenu.fxml");
+    }
+
+    private void switchScene(String resource){
+        try {
+            Parent parent = new FXMLLoader(getClass().getResource(resource)).load();
+            Main.stage.getScene().setRoot(parent);
+            if (Main.backgroundMusic != null) {
+                Main.backgroundMusic.stop();
+                Main.backgroundMusic.seek(javafx.util.Duration.ZERO);
+                Main.backgroundMusic.play();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     
@@ -83,17 +113,25 @@ public class GameController{
                 if (!Main.gamePaused) {
                     timeline.pause();
                     Main.gamePaused = true;
+                    pausePane.setOpacity(1);
                 } else {
                     timeline.play();
                     Main.gamePaused = false;
+                    pausePane.setOpacity(0);
                 }
             }
         });
 
         score = 0;
-        sessionScore = 0;
         gameOver = false;
-        scoreLabel.setText("Score: 0");
+        Main.gamePaused = false;
+        scoreLabel.setText("Scor: 0");
+        gameOverPane.setDisable(true);
+        gameOverPane.setMouseTransparent(true);
+        gameOverPane.setOpacity(0);
+        setupGridOverlay();
+        scoreLabel.toFront();
+        gameOverPane.toFront();
         for(int i=0;i<36;i++){
             for(int j=0;j<20;j++){
                 matrix[i][j]=0;
@@ -108,7 +146,23 @@ public class GameController{
         snakeNodes.addHead(new Point2D(18, 11));
         
         
-        timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), _ -> tick()));
+        switch (Main.speed) {
+            case 1:
+                timeline = new Timeline(new KeyFrame(Duration.seconds(0.4), event -> tick()));
+            
+                break;
+            case 2:
+                timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), event -> tick()));
+            
+                break;
+            case 3:
+                timeline = new Timeline(new KeyFrame(Duration.seconds(0.05), event -> tick()));
+                
+                break;
+        
+            default:
+                break;
+        }
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -208,37 +262,7 @@ public class GameController{
                             }
                         }
                         else{
-                            
-
-
-                            String path = appleImage.getImage().getUrl();
-                            String fileName = path.substring(path.lastIndexOf("/") + 1);
-
-                            if(fileName.equals("apple.png")){
-                                score++;
-                            }
-                            else if(fileName.equals("cherry.png")){
-                                score += 3;
-                                growth += 2;
-                            }
-                            else if(fileName.equals("grapes.png")){
-                                score += 5;
-                                growth += 4;
-                            }
-                            else if(fileName.equals("star.png")){
-                                score += 50;
-                                growth += 49;    
-                            }
-
-
-
-
-
-                            rootPane.getChildren().remove(appleImage);
-                            applePoint = null;
-
-                            Main.eatSound.play();
-                            scoreLabel.setText("Score: "+score);
+                            consumeApple();
                         }
 
                     }
@@ -262,32 +286,7 @@ public class GameController{
                             }
                         }
                         else{
-                            String path = appleImage.getImage().getUrl();
-                            String fileName = path.substring(path.lastIndexOf("/") + 1);
-
-                            if(fileName.equals("apple.png")){
-                                score++;
-                            }
-                            else if(fileName.equals("cherry.png")){
-                                score += 3;
-                                growth += 2;
-                            }
-                            else if(fileName.equals("grapes.png")){
-                                score += 5;
-                                growth += 4;
-                            }
-                            else if(fileName.equals("star.png")){
-                                score += 50;
-                                growth += 49;    
-                            }
-                            
-                            
-                            rootPane.getChildren().remove(appleImage);
-                            applePoint = null;
-
-                            Main.eatSound.play();
-                            scoreLabel.setText("Score: "+score);
-                            
+                            consumeApple();
                         }
                     }
                 }
@@ -310,30 +309,7 @@ public class GameController{
                             }
                         }
                         else{
-                            String path = appleImage.getImage().getUrl();
-                            String fileName = path.substring(path.lastIndexOf("/") + 1);
-
-                            if(fileName.equals("apple.png")){
-                                score++;
-                            }
-                            else if(fileName.equals("cherry.png")){
-                                score += 3;
-                                growth += 2;
-                            }
-                            else if(fileName.equals("grapes.png")){
-                                score += 5;
-                                growth += 4;
-                            }
-                            else if(fileName.equals("star.png")){
-                                score += 50;
-                                growth += 49;    
-                            }
-                            
-                            rootPane.getChildren().remove(appleImage);
-                            applePoint = null;
-
-                            Main.eatSound.play();
-                            scoreLabel.setText("Score: "+score);
+                            consumeApple();
                         }
                     }
                 }
@@ -356,55 +332,33 @@ public class GameController{
                             }
                         }
                         else{
-                            String path = appleImage.getImage().getUrl();
-                            String fileName = path.substring(path.lastIndexOf("/") + 1);
-
-                            if(fileName.equals("apple.png")){
-                                score++;
-                            }
-                            else if(fileName.equals("cherry.png")){
-                                score += 3;
-                                growth += 2;
-                            }
-                            else if(fileName.equals("grapes.png")){
-                                score += 5;
-                                growth += 4;
-                            }
-                            else if(fileName.equals("star.png")){
-                                score += 50;
-                                growth += 49;    
-                            }
-                            
-                            rootPane.getChildren().remove(appleImage);
-                            applePoint = null;
-
-                            Main.eatSound.play();
-                            scoreLabel.setText("Score: "+score);
+                            consumeApple();
                         }
                     }
                 }
                 default ->{}
             }
-            lastDirection = currentDirection;
-            snakeShowGraphics();
-            // snakeShow();
+        lastDirection = currentDirection;
+        snakeShowGraphics();
+        refreshGrid();
+        // snakeShow();
     }
 
     private void gameOver() {
-        sessionScore += score;
-        if(score > Main.databaseHighestScore)
-            Main.databaseHighestScore = score;
-        score = 0;
-        
+        Main.onSessionComplete(score);
         Main.save();
+        score = 0;
         
         gameOver = true;    
         snakeShowGraphics();
-        
+
         Main.backgroundMusic.stop();
         Main.deadSound.play();
-        
+
         gameOverPane.setOpacity(1);
+        gameOverPane.setDisable(false);
+        gameOverPane.setMouseTransparent(false);
+        gameOverPane.toFront();
         timeline.stop();
 
         //TODO: Game Over
@@ -474,6 +428,99 @@ public class GameController{
         System.out.println("tick");
 
         
+    }
+
+    private void setupGridOverlay() {
+        if (gridCanvas == null) {
+            return;
+        }
+
+        gridCanvas.setMouseTransparent(true);
+        gridCanvas.widthProperty().bind(rootPane.widthProperty());
+        gridCanvas.heightProperty().bind(rootPane.heightProperty());
+        gridCanvas.widthProperty().addListener((obs, oldVal, newVal) -> refreshGrid());
+        gridCanvas.heightProperty().addListener((obs, oldVal, newVal) -> refreshGrid());
+        Platform.runLater(this::refreshGrid);
+    }
+
+    private void refreshGrid() {
+        if (gridCanvas == null) {
+            return;
+        }
+
+        GraphicsContext gc = gridCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, gridCanvas.getWidth(), gridCanvas.getHeight());
+
+        if (!Main.gridView) {
+            return;
+        }
+
+        double width = gridCanvas.getWidth();
+        double height = gridCanvas.getHeight();
+        if (width <= 0 || height <= 0) {
+            return;
+        }
+
+        double scaleX = bgImage.getBoundsInParent().getWidth() / baseWidth;
+        double scaleY = bgImage.getBoundsInParent().getHeight() / baseHeight;
+
+        if (scaleX <= 0 || scaleY <= 0) {
+            return;
+        }
+
+        double realCellWidth = cellSize * scaleX;
+        double realCellHeight = cellSize * scaleY;
+        double offsetX = 60 * scaleX;
+        double offsetY = 40 * scaleY;
+        double gridWidth = realCellWidth * matrix.length;
+        double gridHeight = realCellHeight * matrix[0].length;
+
+        gc.setStroke(Color.color(1, 1, 1, 0.2));
+        gc.setLineWidth(1);
+
+        for (int col = 0; col <= matrix.length; col++) {
+            double x = offsetX + col * realCellWidth;
+            gc.strokeLine(x, offsetY, x, offsetY + gridHeight);
+        }
+
+        for (int row = 0; row <= matrix[0].length; row++) {
+            double y = offsetY + row * realCellHeight;
+            gc.strokeLine(offsetX, y, offsetX + gridWidth, y);
+        }
+    }
+
+    private void consumeApple() {
+        if (applePoint == null || appleImage == null) {
+            return;
+        }
+
+        String path = appleImage.getImage().getUrl();
+        String fileName = path.substring(path.lastIndexOf("/") + 1);
+
+        switch (fileName) {
+            case "apple.png" -> score++;
+            case "cherry.png" -> {
+                score += 3;
+                growth += 2;
+            }
+            case "grapes.png" -> {
+                score += 5;
+                growth += 4;
+            }
+            case "star.png" -> {
+                score += 50;
+                growth += 49;
+            }
+            default -> score++;
+        }
+
+        rootPane.getChildren().remove(appleImage);
+        matrix[(int) applePoint.getX()][(int) applePoint.getY()] = 0;
+        applePoint = null;
+        appleImage = null;
+
+        Main.eatSound.play();
+        scoreLabel.setText("Scor: " + score);
     }
 
     private void snakeShowGraphics() {

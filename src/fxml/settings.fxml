@@ -150,12 +150,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <ComboBox fx:id="resolutions1" prefHeight="50.0" prefWidth="200.0" stylesheets="@../style/combo-box.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@../dependencies/resolution-label.png" />
+                              <Image url="@../dependencies/snake-speed.png" />
                            </image>
                         </ImageView>
+                        <Slider fx:id="speed_slider" majorTickUnit="1.0" max="3.0" maxWidth="-Infinity" min="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="271.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <ImageView fx:id="apply_button" fitHeight="60.0" fitWidth="155.0" layoutX="419.0" layoutY="203.0" onMouseClicked="#apply_clicked" onMousePressed="#apply_button_pressed" onMouseReleased="#apply_button_released" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">

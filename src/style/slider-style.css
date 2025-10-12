@@ -14,19 +14,21 @@
 }
 
 .slider .thumb {
-    -fx-background-color: #00FF00;          /* verde fosforescent */
-    -fx-border-color: #006600;              /* verde mai închis */
+    -fx-background-color: linear-gradient(#00ff99, #00c46c);
+    -fx-border-color: rgba(255,255,255,0.65);
     -fx-border-width: 2;
-    -fx-background-radius: 0;               /* pătrat */
-    -fx-pref-width: 16;
-    -fx-pref-height: 16;
-    -fx-effect: dropshadow(gaussian, #00FF00, 10, 0.3, 0, 0); /* glow verde */
+    -fx-background-radius: 50%;
+    -fx-pref-width: 18;
+    -fx-pref-height: 18;
+    -fx-effect: dropshadow(gaussian, rgba(0,255,150,0.6), 14, 0.45, 0, 0);
 }
 
 .slider .thumb:hover {
-    -fx-background-color: #99FF99;          /* mai deschis la hover */
+    -fx-background-color: linear-gradient(#48ffbc, #00d07b);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 .slider .track:hover {
-    -fx-border-color: #99FF99;              /* ușor efect de hover */
+    -fx-border-color: #66ffaa;              /* ușor efect de hover */
 }

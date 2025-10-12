@@ -37,7 +37,7 @@ public class settingsController implements Initializable{
     @FXML
     private GridPane video_pane, audio_pane, game_pane;
     @FXML
-    private Slider audio_slider, effect_slider;
+    private Slider audio_slider, effect_slider, speed_slider;
     @FXML
     private ComboBox<ImageView> resolutions;
     
@@ -121,42 +121,59 @@ public class settingsController implements Initializable{
         Main.buttonClick.play();
         Main.backgroundMusic.setVolume(audio_slider.getValue() / 100);
 
+        try{
         String path = resolutions.getValue().getImage().getUrl();
         String fileName = path.substring(path.lastIndexOf("/") + 1);
         
         // System.out.println(path.substring(path.lastIndexOf("/") + 1));
 
-        if(!resolutions.getValue().toString().equals(null))
-        switch (fileName) {
-            case "800.png":
-                Main.setResolution(800, 600);
-                break;
-            case "1024.png":
-                Main.setResolution(1024, 768);
-                break;
-            case "1280.png":
-                Main.setResolution(1280, 720);
-                break;
-            case "1366.png":
-                Main.setResolution(1366, 768);
-                break;
-            case "1920.png":
-                Main.setResolution(1920, 1080);
-                break;
-            case "2560.png":
-                Main.setResolution(2560, 1440);
-                break;
-        
-            default:
-                break;
+
+            if(!resolutions.getValue().toString().equals(null))
+            switch (fileName) {
+                case "800.png":
+                    Main.setResolution(800, 600);
+                    break;
+                case "1024.png":
+                    Main.setResolution(1024, 768);
+                    break;
+                case "1280.png":
+                    Main.setResolution(1280, 720);
+                    break;
+                case "1366.png":
+                    Main.setResolution(1366, 768);
+                    break;
+                case "1920.png":
+                    Main.setResolution(1920, 1080);
+                    break;
+                case "2560.png":
+                    Main.setResolution(2560, 1440);
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+        catch(Exception e){
+
         }
         
 
 
 
-        Main.buttonClick.setVolume(effect_slider.getValue() / 100);
         Main.eatSound.setVolume(effect_slider.getValue() / 100);
         Main.buttonClick.setVolume(effect_slider.getValue() / 100);
+        Main.deadSound.setVolume(effect_slider.getValue()/ 100);
+    
+    
+        if(game_pane.getOpacity() == 1){
+            Main.speed = (int) speed_slider.getValue();
+
+
+            System.out.println(Main.speed);
+
+        }
+    
+    
     }
 
     @FXML 
@@ -224,6 +241,7 @@ public class settingsController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         transition_for_enter().play();
+        speed_slider.setValue(Main.speed);
         audio_slider.setValue(Main.backgroundMusic.getVolume() * 100);
         effect_slider.setValue(Main.eatSound.getVolume() * 100);
         
@@ -295,6 +313,7 @@ public class settingsController implements Initializable{
                 audio_pane.setMouseTransparent(true);
                 video_pane.setMouseTransparent(false);
                 video_pane.setOpacity(1);
+                
             }
         });
         
@@ -311,6 +330,7 @@ public class settingsController implements Initializable{
                 video_pane.setMouseTransparent(true);
                 audio_pane.setMouseTransparent(false);
                 audio_pane.setOpacity(1);
+                
             }
         });
 
@@ -328,6 +348,7 @@ public class settingsController implements Initializable{
                 audio_pane.setMouseTransparent(true);
                 game_pane.setMouseTransparent(false);
                 game_pane.setOpacity(1);
+               
             }
             
         });

@@ -37,7 +37,7 @@ public class mainMenuController implements Initializable{
     private StackPane background;
 
     @FXML
-    private Label scoreLabel, highestScoreLabel;
+    private Label scoreLabel, highestScoreLabel, coinsLabel;
 
     @FXML
     private void play_button_pressed(){
@@ -124,7 +124,7 @@ public class mainMenuController implements Initializable{
                         break;
 
                         case "game":
-            
+
                         Platform.runLater(() -> {
                             try {                            
                                 Main.stage.getScene().setRoot(new FXMLLoader(getClass().getResource("/fxml/game.fxml")).load());
@@ -137,6 +137,10 @@ public class mainMenuController implements Initializable{
 
                          
                             
+                        break;
+                        case "inventory":
+                        Parent inventory = new FXMLLoader(getClass().getResource("/fxml/inventory.fxml")).load();
+                        Platform.runLater(() -> Main.stage.getScene().setRoot(inventory));
                         break;
                         case "exit":
                             Main.stage.close();
@@ -181,7 +185,8 @@ public class mainMenuController implements Initializable{
         });
 
         scoreLabel.setText("Total Score: "+Main.databaseScore);
-        highestScoreLabel.setText("Highest Score: "+Main.databaseHighestScore);
+        highestScoreLabel.setText("Record: "+Main.databaseHighestScore);
+        coinsLabel.setText("Coins: "+Main.coins);
         
         
         BackgroundImage bgImage = new BackgroundImage(
@@ -220,6 +225,14 @@ public class mainMenuController implements Initializable{
             public void handle(Event arg0) {
                 Main.buttonClick.play();
                 transition_for_exit("settings").play();;
+            }
+        });
+
+        inventory_button.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                Main.buttonClick.play();
+                transition_for_exit("inventory").play();
             }
         });
     }    

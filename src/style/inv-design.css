@@ -1,0 +1,28 @@
+.button{
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: contain;
+    
+}
+
+#back{
+    -fx-background-image: url("back.png");
+}
+#back:pressed{
+    -fx-background-image: url("back-pressed.png");
+}
+#to_shop{
+    -fx-background-image: url("shop.png");
+}
+#to_shop:pressed{
+    -fx-background-image: url("shop-pressed.png");
+}
+#borderPane{
+    -fx-background-image: url("background.png");
+
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
