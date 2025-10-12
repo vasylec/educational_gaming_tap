@@ -167,10 +167,6 @@ public class settingsController implements Initializable{
     
         if(game_pane.getOpacity() == 1){
             Main.speed = (int) speed_slider.getValue();
-
-
-            System.out.println(Main.speed);
-
         }
     
     
@@ -249,7 +245,12 @@ public class settingsController implements Initializable{
         video_pane.setOpacity(0);
         audio_pane.setOpacity(0);
         game_pane.setOpacity(1);
-        gridViewButton.setImage(new Image("\\dependencies\\yes.png"));
+        if(Main.gridView){
+            gridViewButton.setImage(new Image("\\dependencies\\yes.png"));
+        }
+        else{
+            gridViewButton.setImage(new Image("\\dependencies\\no.png"));
+        }
 
 
         if(Main.fullscreen == true)

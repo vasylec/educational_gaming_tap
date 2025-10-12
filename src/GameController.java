@@ -358,7 +358,7 @@ public class GameController{
         gameOverPane.setMouseTransparent(false);
         gameOverPane.toFront();
         timeline.stop();
-        System.out.println("Game over");
+        // System.out.println("Game over");
     }
 
 
@@ -389,7 +389,7 @@ public class GameController{
             double x = 60 * scaleX + col * realCellWidth;
             double y = 40 * scaleY + row * realCellHeight;
 
-            appleImage = new ImageView(new javafx.scene.image.Image(appleSkin));
+            appleImage = new ImageView(new javafx.scene.image.Image(getClass().getResource(appleSkin).toExternalForm()));
             appleImage.setFitWidth(realCellWidth);
             appleImage.setFitHeight(realCellHeight);
             appleImage.setPreserveRatio(false);
@@ -482,18 +482,18 @@ public class GameController{
         String fileName = path.substring(path.lastIndexOf("/") + 1);
 
         switch (fileName) {
-            case "apple.png" -> score++;
+            case "apple.png" -> score += 1*Main.speed;
             case "cherry.png" -> {
-                score += 3;
+                score += 3*Main.speed;
                 growth += 2;
             }
             case "grapes.png" -> {
-                score += 5;
+                score += 5*Main.speed;
                 growth += 4;
             }
             case "star.png" -> {
-                score += 50;
-                growth += 49;
+                score += 10*Main.speed;
+                growth += 9;
             }
             default -> score++;
         }

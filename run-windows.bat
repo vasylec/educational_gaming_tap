@@ -1,47 +1,18 @@
 @echo off
-setlocal enabledelayedexpansion
+cd /d "%~dp0"
 
-rem === Path constants =======================================================
-set "PROJECT_DIR=%~dp0"
-set "FX_LIB=%PROJECT_DIR%lib"
-set "MODULES=javafx.controls,javafx.fxml,javafx.media"
+:: === CONFIG ===
+set FX_PATH=lib
+set BIN_PATH=out
+set MAIN_CLASS=Main
 
-rem === Check prerequisites ==================================================
-if not defined JAVA_HOME (
-    echo [ERROR] Set JAVA_HOME to a JDK 17 or newer installation and reopen this terminal.
-    exit /b 1
-)
+:: === JVM OPTIONS ===
+set JAVA_OPTS=-Xms256m -Xmx2048m ^
+--enable-native-access=javafx.graphics ^
+--enable-native-access=javafx.media ^
+--module-path "%FX_PATH%" ^
+--add-modules javafx.controls,javafx.fxml,javafx.media
 
-if not exist "%JAVA_HOME%\bin\javac.exe" (
-    echo [ERROR] JAVA_HOME is set to "%JAVA_HOME%" but no javac.exe was found.
-    exit /b 1
-)
-
-if not exist "%FX_LIB%" (
-    echo [ERROR] JavaFX library folder not found: "%FX_LIB%".
-    exit /b 1
-)
-
-rem === Compile sources ======================================================
-pushd "%PROJECT_DIR%"
-if not exist "out" mkdir "out"
-
-set "SOURCES="
-for /f "delims=" %%F in ('dir /b /s src\*.java') do (
-    set "SOURCES=!SOURCES! "%%F""
-)
-
-echo Compiling sources...
-"%JAVA_HOME%\bin\javac.exe" --module-path "%FX_LIB%" --add-modules %MODULES% -d out %SOURCES%
-if errorlevel 1 (
-    echo [ERROR] Compilation failed. See diagnostics above.
-    popd
-    exit /b 1
-)
-
-rem === Launch the game ======================================================
-echo Launching game...
-"%JAVA_HOME%\bin\java.exe" --module-path "%FX_LIB%" --add-modules %MODULES% -cp out Main
-set "EXIT_CODE=%ERRORLEVEL%"
-popd
-exit /b %EXIT_CODE%
+:: === RUN ===
+java %JAVA_OPTS% --enable-native-access=javafx.graphics --enable-native-access=javafx.media --module-path "%FX_PATH%" --add-modules javafx.controls,javafx.fxml,javafx.media -cp "%BIN_PATH%" %MAIN_CLASS%
+pause

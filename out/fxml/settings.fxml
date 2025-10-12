@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="settingsController">
+   <children>
+      <BorderPane fx:id="fade" prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <GridPane maxHeight="-Infinity" prefHeight="75.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.0" minWidth="10.0" percentWidth="0.0" prefWidth="190.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="405.0" minWidth="10.0" percentWidth="10.0" prefWidth="248.0" />
+                  <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" maxWidth="405.0" minWidth="10.0" percentWidth="38.0" prefWidth="107.0" />
+                <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" maxWidth="493.0" minWidth="10.0" percentWidth="62.0" prefWidth="493.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <ImageView fx:id="back_button" fitHeight="70.0" fitWidth="100.0" onMousePressed="#back_button_pressed" onMouseReleased="#back_button_released" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                     <image>
+                        <Image url="@../dependencies/back.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                     <children>
+                        <ImageView fx:id="video_button" fitHeight="70.0" fitWidth="100.0" layoutX="-32.0" layoutY="14.0" onMousePressed="#video_button_pressed" onMouseReleased="#video_button_released" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../dependencies/video.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <ImageView fx:id="audio_button" fitHeight="70.0" fitWidth="100.0" layoutX="86.0" layoutY="14.0" onMousePressed="#audio_button_pressed" onMouseReleased="#audio_button_released" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../dependencies/audio.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <ImageView fx:id="game_button" fitHeight="70.0" fitWidth="100.0" layoutX="-131.0" layoutY="15.0" onMousePressed="#game_button_pressed" onMouseReleased="#game_button_released" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../dependencies/game.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </GridPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <GridPane fx:id="audio_pane" layoutX="21.0" layoutY="21.0" opacity="0.0" prefHeight="273.0" prefWidth="563.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="91.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@../dependencies/audio-volume-label.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="91.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@../dependencies/effects-volume-label.png" />
+                           </image>
+                        </ImageView>
+                        <Slider fx:id="audio_slider" maxWidth="-Infinity" prefHeight="14.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                        <Slider fx:id="effect_slider" maxWidth="-Infinity" prefHeight="14.0" prefWidth="271.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="video_pane" opacity="0.0" prefHeight="273.0" prefWidth="563.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@../dependencies/fullscreen-label.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="fullscreen_button" fitHeight="64.0" fitWidth="158.0" onMouseClicked="#fullscreen_button_action" onMousePressed="#yes_no_button_pressed" onMouseReleased="#yes_no_button_released" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@../dependencies/no.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <ComboBox fx:id="resolutions" prefHeight="50.0" prefWidth="200.0" stylesheets="@../style/combo-box.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../dependencies/resolution-label.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="game_pane" layoutX="18.0" layoutY="20.0" prefHeight="273.0" prefWidth="563.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@../dependencies/grid-view-label.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="gridViewButton" fitHeight="64.0" fitWidth="158.0" onMousePressed="#yes_no_button_pressed2" onMouseReleased="#yes_no_button_released2" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@../dependencies/no.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../dependencies/snake-speed.png" />
+                           </image>
+                        </ImageView>
+                        <Slider fx:id="speed_slider" majorTickUnit="1.0" max="3.0" maxWidth="-Infinity" min="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="271.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                  <ImageView fx:id="apply_button" fitHeight="60.0" fitWidth="155.0" layoutX="419.0" layoutY="203.0" onMouseClicked="#apply_clicked" onMousePressed="#apply_button_pressed" onMouseReleased="#apply_button_released" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <image>
+                        <Image url="@../dependencies/apply.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>

@@ -1,0 +1,72 @@
+/* Se aplică tuturor ToggleButton */
+.toggle-button {
+    -fx-font-family: "Consolas", monospace;
+    -fx-font-size: 18px;
+    /* -fx-text-fill: #00ff66; */
+    -fx-background-color: transparent;
+    
+    -fx-border-color: #00ff66;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 0;
+    -fx-padding: 8 24;
+    -fx-effect: dropshadow(gaussian, #00ff66, 8, 0.5, 0, 0);
+    -fx-cursor: hand;
+}
+
+/* Hover */
+.toggle-button:hover {
+    /* -fx-background-color: #002200; */
+}
+
+/* Click */
+.toggle-button:armed {
+    /* -fx-background-color: #003300; */
+    -fx-translate-y: 1px;
+}
+
+/* ON */
+.toggle-button:selected {
+    -fx-background-color: #00ff66;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(gaussian, #00ff66, 20, 0.6, 0, 0);
+}
+
+/* Hover când e ON */
+.toggle-button:selected:hover {
+    -fx-background-color: #33ff99;
+}
+
+/* Focus glow */
+.toggle-button:focused {
+    -fx-effect: dropshadow(gaussian, #00ff66, 20, 0.6, 0, 0);
+}
+
+.primary-button {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111;
+    -fx-background-color: linear-gradient(#ffd452, #f0a500);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #ffffffaa;
+    -fx-border-width: 2;
+    -fx-padding: 10 28;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0.5, 0, 3);
+    -fx-cursor: hand;
+    -fx-text-alignment: center;
+}
+
+.primary-button:hover {
+    -fx-background-color: linear-gradient(#ffe27d, #f9b234);
+}
+
+.primary-button:pressed {
+    -fx-translate-y: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.4, 0, 1);
+}
+
+.primary-button:focused {
+    -fx-effect: dropshadow(gaussian, rgba(255, 230, 120, 0.7), 20, 0.6, 0, 0);
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
+
+                <children>
+        <ImageView fx:id="bgImage" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@../dependencies/snakeGame.png" />
+            </image>
+        </ImageView>
+      <Canvas fx:id="gridCanvas" mouseTransparent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="scoreLabel" layoutX="14.0" layoutY="-15.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0" prefWidth="888.0" text="Label" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="-15.0">
+         <font>
+            <Font name="ROGFontsv1.6-Regular" size="40.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Label>
+      <Pane fx:id="gameOverPane" layoutX="210.0" layoutY="152.0" opacity="0.0" prefHeight="250.0" prefWidth="380.0" style="-fx-background-color: rgba(0, 0, 0, 0.75); -fx-background-radius: 12;" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="152.0">
+         <children>
+            <Label alignment="CENTER" layoutX="50.0" layoutY="30.0" prefWidth="280.0" text="GAME OVER" textFill="WHITE">
+               <font>
+                  <Font name="ROGFontsv1.6-Regular" size="28.0" />
+               </font>
+            </Label>
+            <Button layoutX="125.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleRestart" prefWidth="130.0" text="RESTART">
+               <font>
+                  <Font name="ROGFontsv1.6-Regular" size="12.0" />
+               </font></Button>
+            <Button layoutX="125.0" layoutY="170.0" mnemonicParsing="false" onAction="#handleBackToMenu" prefWidth="130.0" text="Menu" />
+         </children></Pane>
+      <Pane fx:id="pausePane" layoutX="220.0" layoutY="162.0" opacity="0.0" prefHeight="250.0" prefWidth="380.0" style="-fx-background-color: rgba(0, 0, 0, 0.75); -fx-background-radius: 12;">
+         <children>
+            <Label alignment="CENTER" layoutX="50.0" layoutY="30.0" prefWidth="280.0" text="PAUSE" textFill="WHITE">
+               <font>
+                  <Font name="ROGFontsv1.6-Regular" size="28.0" />
+               </font>
+            </Label>
+            <Button layoutX="125.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleRestart" prefWidth="130.0" text="RESTART">
+               <font>
+                  <Font name="ROGFontsv1.6-Regular" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="125.0" layoutY="170.0" mnemonicParsing="false" onAction="#handleBackToMenu" prefWidth="130.0" text="Menu" />
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

@@ -46,49 +46,89 @@ public class Main extends Application {
     private void loadSkins() {
         skinDefinitions.clear();
         skinDefinitions.add(new SkinDefinition(
-            "default",
-            "Clasic",
-            0,
-            "\\dependencies\\snakes\\defaultSnake\\head-right.png",
-            new SnakeSkin(
-                "\\dependencies\\snakes\\defaultSnake\\body-orizontal.png", "\\dependencies\\snakes\\defaultSnake\\body-vertical.png",
-                "\\dependencies\\snakes\\defaultSnake\\body-curve-left-up.png", "\\dependencies\\snakes\\defaultSnake\\body-curve-up-right.png", "\\dependencies\\snakes\\defaultSnake\\body-curve-left-down.png", "\\dependencies\\snakes\\defaultSnake\\body-curve-down-right.png",
-                "\\dependencies\\snakes\\defaultSnake\\body-end-up.png", "\\dependencies\\snakes\\defaultSnake\\body-end-down.png", "\\dependencies\\snakes\\defaultSnake\\body-end-left.png", "\\dependencies\\snakes\\defaultSnake\\body-end-right.png",
-                "\\dependencies\\snakes\\defaultSnake\\head-up.png", "\\dependencies\\snakes\\defaultSnake\\head-down.png", "\\dependencies\\snakes\\defaultSnake\\head-left.png", "\\dependencies\\snakes\\defaultSnake\\head-right.png",
-                "\\dependencies\\snakes\\defaultSnake\\head-up.gif", "\\dependencies\\snakes\\defaultSnake\\head-down.gif", "\\dependencies\\snakes\\defaultSnake\\head-left.gif", "\\dependencies\\snakes\\defaultSnake\\head-right.gif"
-            ),
-            true
-        ));
+    "default",
+    "Clasic",
+    0,
+    getClass().getResource("/dependencies/snakes/defaultSnake/head-right.png").toExternalForm(),
+    new SnakeSkin(
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-orizontal.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-vertical.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-curve-left-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-curve-up-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-curve-left-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-curve-down-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-end-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-end-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-end-left.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/body-end-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/head-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/head-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/head-left.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/head-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/head-up.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/head-down.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/head-left.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/defaultSnake/head-right.gif").toExternalForm()
+    ),
+    true
+));
 
-        skinDefinitions.add(new SkinDefinition(
-            "red",
-            "Red Snake",
-            250,
-            "\\dependencies\\snakes\\redSnake\\head-right.png",
-            new SnakeSkin(
-                "\\dependencies\\snakes\\redSnake\\body-orizontal.png", "\\dependencies\\snakes\\redSnake\\body-vertical.png",
-                "\\dependencies\\snakes\\redSnake\\body-curve-left-up.png", "\\dependencies\\snakes\\redSnake\\body-curve-up-right.png", "\\dependencies\\snakes\\redSnake\\body-curve-left-down.png", "\\dependencies\\snakes\\redSnake\\body-curve-down-right.png",
-                "\\dependencies\\snakes\\redSnake\\body-end-up.png", "\\dependencies\\snakes\\redSnake\\body-end-down.png", "\\dependencies\\snakes\\redSnake\\body-end-left.png", "\\dependencies\\snakes\\redSnake\\body-end-right.png",
-                "\\dependencies\\snakes\\redSnake\\head-up.png", "\\dependencies\\snakes\\redSnake\\head-down.png", "\\dependencies\\snakes\\redSnake\\head-left.png", "\\dependencies\\snakes\\redSnake\\head-right.png",
-                "\\dependencies\\snakes\\redSnake\\head-up.gif", "\\dependencies\\snakes\\redSnake\\head-down.gif", "\\dependencies\\snakes\\redSnake\\head-left.gif", "\\dependencies\\snakes\\redSnake\\head-right.gif"
-            ),
-            false
-        ));
+skinDefinitions.add(new SkinDefinition(
+    "red",
+    "Red Snake",
+    250,
+    getClass().getResource("/dependencies/snakes/redSnake/head-right.png").toExternalForm(),
+    new SnakeSkin(
+        getClass().getResource("/dependencies/snakes/redSnake/body-orizontal.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/body-vertical.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/body-curve-left-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/body-curve-up-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/body-curve-left-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/body-curve-down-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/body-end-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/body-end-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/body-end-left.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/body-end-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/head-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/head-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/head-left.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/head-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/head-up.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/head-down.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/head-left.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/redSnake/head-right.gif").toExternalForm()
+    ),
+    false
+));
 
-        skinDefinitions.add(new SkinDefinition(
-            "neon",
-            "Neon",
-            400,
-            "\\dependencies\\snakes\\futuristicSnake\\head-right.png",
-            new SnakeSkin(
-                "\\dependencies\\snakes\\futuristicSnake\\body-orizontal.png", "\\dependencies\\snakes\\futuristicSnake\\body-vertical.png",
-                "\\dependencies\\snakes\\futuristicSnake\\body-curve-left-up.png", "\\dependencies\\snakes\\futuristicSnake\\body-curve-up-right.png", "\\dependencies\\snakes\\futuristicSnake\\body-curve-left-down.png", "\\dependencies\\snakes\\futuristicSnake\\body-curve-down-right.png",
-                "\\dependencies\\snakes\\futuristicSnake\\body-end-up.png", "\\dependencies\\snakes\\futuristicSnake\\body-end-down.png", "\\dependencies\\snakes\\futuristicSnake\\body-end-left.png", "\\dependencies\\snakes\\futuristicSnake\\body-end-right.png",
-                "\\dependencies\\snakes\\futuristicSnake\\head-up.png", "\\dependencies\\snakes\\futuristicSnake\\head-down.png", "\\dependencies\\snakes\\futuristicSnake\\head-left.png", "\\dependencies\\snakes\\futuristicSnake\\head-right.png",
-                "\\dependencies\\snakes\\futuristicSnake\\head-up.gif", "\\dependencies\\snakes\\futuristicSnake\\head-down.gif", "\\dependencies\\snakes\\futuristicSnake\\head-left.gif", "\\dependencies\\snakes\\futuristicSnake\\head-right.gif"
-            ),
-            false
-        ));
+skinDefinitions.add(new SkinDefinition(
+    "neon",
+    "Neon",
+    400,
+    getClass().getResource("/dependencies/snakes/futuristicSnake/head-right.png").toExternalForm(),
+    new SnakeSkin(
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-orizontal.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-vertical.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-curve-left-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-curve-up-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-curve-left-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-curve-down-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-end-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-end-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-end-left.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/body-end-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/head-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/head-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/head-left.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/head-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/head-up.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/head-down.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/head-left.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/futuristicSnake/head-right.gif").toExternalForm()
+    ),
+    false
+));
+
 
         selectedSkinId = "default";
         selectedSkin = skinDefinitions.get(0).getSkin();
@@ -335,7 +375,7 @@ public class Main extends Application {
             }
         });
 
-        gameBgImage = new Image("dependencies\\snakeGame.png");
+        gameBgImage = new Image(getClass().getResource("\\dependencies\\snakeGame.png").toExternalForm());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
         root = loader.load();
@@ -346,7 +386,7 @@ public class Main extends Application {
         stage.setWidth(800);
         stage.setHeight(600);
         stage.setResizable(false);
-        stage.getIcons().add(new Image("dependencies\\snakes\\defaultSnake\\head-down.png"));
+        stage.getIcons().add(new Image(getClass().getResource("/dependencies/snakes/defaultSnake/head-down.png").toExternalForm()));
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
     }

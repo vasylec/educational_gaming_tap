@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="background" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainMenuController">
+   <children>
+      <AnchorPane fx:id="fade" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <VBox alignment="CENTER" layoutX="225.0" layoutY="132.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fx:id="play_button" fitHeight="75.0" fitWidth="100.0" onMousePressed="#play_button_pressed" onMouseReleased="#play_button_released" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../dependencies/play.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="inventory_button" fitHeight="89.0" fitWidth="151.0" onMousePressed="#inventory_button_pressed" onMouseReleased="#inventory_button_released" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../dependencies/inventory.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="settings_button" fitHeight="65.0" fitWidth="100.0" onMousePressed="#settings_button_pressed" onMouseReleased="#settings_button_released" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../dependencies/settings.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="15.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="exit_button" fitHeight="90.0" fitWidth="100.0" onMousePressed="#exit_button_pressed" onMouseReleased="#exit_button_released" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../dependencies/exit.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </VBox>
+            <ImageView fitHeight="213.0" fitWidth="400.0" layoutX="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../dependencies/title.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="infoPanel" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="scoreLabel" text="Scor:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="ROGFontsv1.6-Regular" size="24.0" />
+               </font></Label>
+            <Label fx:id="highestScoreLabel" layoutX="10.0" layoutY="10.0" text="Record:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
+               <font>
+                  <Font name="ROGFontsv1.6-Regular" size="24.0" />
+               </font></Label>
+            <Label fx:id="coinsLabel" layoutX="10.0" layoutY="80.0" text="Monede:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="70.0">
+               <font>
+                  <Font name="ROGFontsv1.6-Regular" size="24.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
