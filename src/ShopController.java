@@ -68,7 +68,7 @@ public class ShopController implements Initializable {
     }
 
     private void refreshCoins() {
-        coinsLabel.setText("Monede: " + Main.coins);
+        coinsLabel.setText("Coins: " + Main.coins);
     }
 
     @FXML

@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane id="borderPane" stylesheets="@../style/inv-design.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShopController">
    <children>
       <BorderPane fx:id="fade" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/inv-design.css">
@@ -24,22 +23,22 @@
                      <children>
                         <Button id="back" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#handleBack" prefHeight="76.0" prefWidth="100.0">
                            <font>
-                              <Font name="ROGFontsv1.6-Regular" size="24.0" />
+                              <Font name="OCR A Extended" size="24.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
                         <Region prefHeight="25.0" prefWidth="188.0" HBox.hgrow="ALWAYS" />
-                        <Label prefHeight="45.0" prefWidth="194.0" text="Magazin Skins">
+                        <Label prefHeight="45.0" prefWidth="157.0" text="Skin Shop">
                            <font>
-                              <Font name="ROGFontsv1.6-Regular" size="24.0" />
+                              <Font name="OCR A Extended" size="24.0" />
                            </font>
                         </Label>
                         <Region prefHeight="25.0" prefWidth="181.0" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="coinsLabel" prefHeight="45.0" prefWidth="180.0" text="Monede: 0">
+                        <Label fx:id="coinsLabel" prefHeight="45.0" prefWidth="181.0" text="Monede: 0">
                            <font>
-                              <Font name="ROGFontsv1.6-Regular" size="24.0" />
+                              <Font name="OCR A Extended" size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -57,9 +56,9 @@
          <bottom>
             <VBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="800.0" spacing="6.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="statusLabel" text="-">
+                  <Label fx:id="statusLabel" prefHeight="26.0" prefWidth="580.0" text="-">
                      <font>
-                        <Font name="ROGFontsv1.6-Regular" size="24.0" />
+                        <Font name="OCR A Extended" size="24.0" />
                      </font>
                      <VBox.margin>
                         <Insets />

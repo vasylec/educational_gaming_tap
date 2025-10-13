@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane id="borderPane" fx:id="stackPane" stylesheets="@../style/inv-design.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InventoryController">
    <children>
       <BorderPane fx:id="fade" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/inv-design.css">
@@ -28,15 +27,15 @@
                            </cursor>
                         </Button>
                         <Region prefHeight="75.0" prefWidth="142.0" HBox.hgrow="ALWAYS" />
-                        <Label text="Inventory">
+                        <Label prefHeight="26.0" prefWidth="159.0" text="Inventory">
                            <font>
-                              <Font name="ROGFontsv1.6-Regular" size="24.0" />
+                              <Font name="OCR A Extended" size="24.0" />
                            </font>
                         </Label>
                         <Region prefHeight="75.0" prefWidth="95.0" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="coinsLabel" text="Coins: 0">
+                        <Label fx:id="coinsLabel" prefHeight="26.0" prefWidth="250.0" text="Coins: 0">
                            <font>
-                              <Font name="ROGFontsv1.6-Regular" size="24.0" />
+                              <Font name="OCR A Extended" size="24.0" />
                            </font>
                         </Label>
                         <Button id="to_shop" mnemonicParsing="false" onAction="#handleOpenShop" prefHeight="75.0" prefWidth="152.0" stylesheets="@../style/inv-design.css">
@@ -59,9 +58,9 @@
          <bottom>
             <VBox prefHeight="48.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="selectedLabel" maxHeight="-Infinity" prefHeight="10.0" text="Selected Skin: -">
+                  <Label fx:id="selectedLabel" maxHeight="-Infinity" prefHeight="26.0" prefWidth="576.0" text="Selected Skin: -">
                      <font>
-                        <Font name="ROGFontsv1.6-Regular" size="24.0" />
+                        <Font name="OCR A Extended" size="24.0" />
                      </font>
                      <VBox.margin>
                         <Insets left="20.0" />

@@ -46,10 +46,10 @@ public class Main extends Application {
     private void loadSkins() {
         skinDefinitions.clear();
         skinDefinitions.add(new SkinDefinition(
-    "default",
-    "Clasic",
-    0,
-    getClass().getResource("/dependencies/snakes/defaultSnake/head-right.png").toExternalForm(),
+        "default",
+        "Clasic",
+        0,
+        getClass().getResource("/dependencies/snakes/defaultSnake/head-right.png").toExternalForm(),
     new SnakeSkin(
         getClass().getResource("/dependencies/snakes/defaultSnake/body-orizontal.png").toExternalForm(),
         getClass().getResource("/dependencies/snakes/defaultSnake/body-vertical.png").toExternalForm(),
@@ -125,6 +125,34 @@ skinDefinitions.add(new SkinDefinition(
         getClass().getResource("/dependencies/snakes/futuristicSnake/head-down.gif").toExternalForm(),
         getClass().getResource("/dependencies/snakes/futuristicSnake/head-left.gif").toExternalForm(),
         getClass().getResource("/dependencies/snakes/futuristicSnake/head-right.gif").toExternalForm()
+    ),
+    false
+));
+
+skinDefinitions.add(new SkinDefinition(
+    "golden",
+    "Golden Dragon",
+    400,
+    getClass().getResource("/dependencies/snakes/goldenSnake/head-right.png").toExternalForm(),
+    new SnakeSkin(
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-orizontal.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-vertical.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-curve-left-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-curve-up-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-curve-left-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-curve-down-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-end-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-end-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-end-left.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/body-end-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/head-up.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/head-down.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/head-left.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/head-right.png").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/head-up.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/head-down.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/head-left.gif").toExternalForm(),
+        getClass().getResource("/dependencies/snakes/goldenSnake/head-right.gif").toExternalForm()
     ),
     false
 ));
