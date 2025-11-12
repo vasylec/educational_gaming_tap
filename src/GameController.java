@@ -201,18 +201,21 @@ public class GameController{
 
         double x = Math.random() * 100;
 
-        if(x < 5){
-            appleGenerator(star);
-        }
-        else if(x < 10){
-            appleGenerator(grapes);
-        }
-        else if(x < 30){
-            appleGenerator(cherry);
-        }
-        else{
-            appleGenerator(apple);
-        }
+        appleGenerator(star);
+        
+        appleGenerator(star);
+
+        // if(x < 5){
+        // }
+        // else if(x < 10){
+        //     appleGenerator(grapes);
+        // }
+        // else if(x < 30){
+        //     appleGenerator(cherry);
+        // }
+        // else{
+        //     appleGenerator(apple);
+        // }
 
         
 
@@ -493,7 +496,7 @@ public class GameController{
             }
             case "star.png" -> {
                 score += 10*Main.speed;
-                growth += 9;
+                growth += 49;
             }
             default -> score++;
         }

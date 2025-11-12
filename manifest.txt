@@ -1,2 +1,0 @@
-Main-Class: Main
-Class-Path: lib/javafx.controls.jar lib/javafx.fxml.jar lib/javafx.graphics.jar lib/javafx.media.jar
