@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
@@ -38,6 +39,9 @@ public class GameController{
     @FXML
     private Label scoreLabel;
 
+    @FXML
+    private ImageView gameoverRestart,gameoverMenu,pauseRestart,pauseMenu;
+
     private Timeline timeline;
     private final double baseWidth = 1920;
     private final double baseHeight = 1080;
@@ -67,19 +71,61 @@ public class GameController{
     ;
 
     @FXML
+    private void menu_pressed(){
+        gameoverMenu.setImage(new Image("\\dependencies\\menu-pressed.png"));
+        pauseMenu.setImage(new Image("\\dependencies\\menu-pressed.png"));
+    }
+    
+    @FXML
+    private void menu_released(){
+        gameoverMenu.setImage(new Image("\\dependencies\\menu.png"));
+        pauseMenu.setImage(new Image("\\dependencies\\menu.png"));
+    }
+
+    @FXML
+    private void restartgreen_pressed(){
+        gameoverRestart.setImage(new Image("\\dependencies\\restartgreen-pressed.png"));
+    }
+
+    @FXML
+    private void restartgreen_released(){
+        gameoverRestart.setImage(new Image("\\dependencies\\restartgreen.png"));
+    }
+
+    @FXML
+    private void restartred_pressed(){
+        pauseRestart.setImage(new Image("\\dependencies\\restart-pressed.png"));
+    }
+
+    @FXML
+    private void restartred_released(){
+        pauseRestart.setImage(new Image("\\dependencies\\restart.png"));
+    }
+
+    @FXML
     private void handleRestart(){
-        if (!gameOver) {
-            return;
-        }
+        
+        System.out.println("Restart apăsat!");
+        Main.onSessionComplete(score);
+        Main.save();
+        gameOverPane.setOpacity(0);
+        pausePane.setOpacity(0);
         if (Main.buttonClick != null) {
             Main.buttonClick.play();
+
         }
-        timeline.stop();
+
+        if (timeline != null) {
+            timeline.stop();
+        }
+
         switchScene("/fxml/game.fxml");
     }
 
     @FXML
     private void handleBackToMenu(){
+        Main.onSessionComplete(score);
+        Main.save();
         if (Main.buttonClick != null) {
             Main.buttonClick.play();
         }
@@ -252,21 +298,20 @@ public class GameController{
 
         double x = Math.random() * 100;
 
-        appleGenerator(star);
         
-        appleGenerator(star);
-
-        // if(x < 5){
-        // }
-        // else if(x < 10){
-        //     appleGenerator(grapes);
-        // }
-        // else if(x < 30){
-        //     appleGenerator(cherry);
-        // }
-        // else{
-        //     appleGenerator(apple);
-        // }
+        
+        if(x < 5){
+            appleGenerator(star);
+        }
+        else if(x < 10){
+            appleGenerator(grapes);
+        }
+        else if(x < 30){
+            appleGenerator(cherry);
+        }
+        else{
+            appleGenerator(apple);
+        }
 
         
 
@@ -548,7 +593,7 @@ public class GameController{
             }
             case "star.png" -> {
                 score += 10*Main.speed;
-                growth += 49;
+                growth += 9;
             }
             default -> score++;
         }
@@ -561,59 +606,6 @@ public class GameController{
         Main.eatSound.play();
         scoreLabel.setText("Scor: " + score);
     }
-
-    // private void snakeShowGraphics() {
-    //     // Ștergem vechile ImageView-uri ale șarpelui
-    //     rootPane.getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getId() != null && ((ImageView) node).getId().startsWith("snake"));
-
-    //     List<SnakeNode> nodes = snakeNodes.getNodes();
-
-    //     double scaleX = bgImage.getBoundsInParent().getWidth() / baseWidth;
-    //     double scaleY = bgImage.getBoundsInParent().getHeight() / baseHeight;
-
-    //     double realCellWidth = cellSize * scaleX;
-    //     double realCellHeight = cellSize * scaleY;
-
-    //     for (int i = 0; i < nodes.size(); i++) {
-    //         SnakeNode current = nodes.get(i);
-    //         SnakeNode prev = i > 0 ? nodes.get(i - 1) : null;
-    //         SnakeNode next = i < nodes.size() - 1 ? nodes.get(i + 1) : null;
-
-    //         String imagePath = "";
-
-    //         if(gameOver == false){
-    //             if (i == 0) { // Coada
-    //                 imagePath = getTailImage(current, next);
-    //             } else if (i == nodes.size() - 1) { // Cap
-    //                 imagePath = getHeadImage(current, prev);
-    //             } else { // Corp
-    //                 imagePath = getBodyImage(current, prev, next);
-    //             }
-    //         }
-    //         else{
-    //             if (i == 0) { // Coada
-    //                 imagePath = getTailImage(current, next);
-    //             } else if (i == nodes.size() - 1) { // Cap
-    //                 imagePath = getDeadHeadImage(current, prev);
-    //             } else { // Corp
-    //                 imagePath = getBodyImage(current, prev, next);
-    //             }
-
-    //         }
-
-
-    //         // Încarcă imaginea corect
-    //         ImageView iv = new ImageView(new javafx.scene.image.Image(imagePath));
-    //         iv.setId("snake" + i); // ca să putem șterge mai târziu
-    //         iv.setFitWidth(realCellWidth);
-    //         iv.setFitHeight(realCellHeight);
-    //         iv.setPreserveRatio(false);
-    //         iv.setLayoutX(60 * scaleX + current.getX() * realCellWidth);
-    //         iv.setLayoutY(40 * scaleY + current.getY() * realCellHeight);
-
-    //         rootPane.getChildren().add(iv);
-    //     }
-    // }
 
     private void snakeShowGraphics() {
         // Ștergem vechile ImageView-uri ale șarpelui
