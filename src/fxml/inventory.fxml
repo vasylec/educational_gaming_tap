@@ -26,19 +26,19 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Region prefHeight="75.0" prefWidth="142.0" HBox.hgrow="ALWAYS" />
-                        <Label prefHeight="26.0" prefWidth="159.0" text="Inventory">
+                        <Region prefHeight="74.0" prefWidth="23.0" HBox.hgrow="ALWAYS" />
+                        <Label prefHeight="26.0" prefWidth="215.0" text="Inventory">
                            <font>
                               <Font name="OCR A Extended" size="24.0" />
                            </font>
                         </Label>
-                        <Region prefHeight="75.0" prefWidth="95.0" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="coinsLabel" prefHeight="26.0" prefWidth="250.0" text="Coins: 0">
+                        <Region prefHeight="74.0" prefWidth="34.0" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="coinsLabel" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="210.0" text="Coins: 0">
                            <font>
                               <Font name="OCR A Extended" size="24.0" />
                            </font>
                         </Label>
-                        <Button id="to_shop" mnemonicParsing="false" onAction="#handleOpenShop" prefHeight="75.0" prefWidth="152.0" stylesheets="@../style/inv-design.css">
+                        <Button id="to_shop" mnemonicParsing="false" onAction="#handleOpenShop" prefHeight="74.0" prefWidth="146.0" stylesheets="@../style/inv-design.css">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

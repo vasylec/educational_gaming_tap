@@ -1,2 +1,2 @@
-selected=default
-unlocked=default
+selected=red
+unlocked=default,red,neon,golden

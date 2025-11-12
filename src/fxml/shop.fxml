@@ -35,8 +35,8 @@
                               <Font name="OCR A Extended" size="24.0" />
                            </font>
                         </Label>
-                        <Region prefHeight="25.0" prefWidth="181.0" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="coinsLabel" prefHeight="45.0" prefWidth="181.0" text="Monede: 0">
+                        <Region prefHeight="74.0" prefWidth="35.0" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="coinsLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="46.0" prefWidth="290.0" text="Monede: 0" textAlignment="RIGHT">
                            <font>
                               <Font name="OCR A Extended" size="24.0" />
                            </font>
