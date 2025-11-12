@@ -102,10 +102,41 @@ public class GameController{
     }
 
     
+    private void centerOverlay(Pane pane) {
+        if (pane != null && rootPane != null) {
+            double x = (rootPane.getWidth() - pane.getPrefWidth()) / 2;
+            double y = (rootPane.getHeight() - pane.getPrefHeight()) / 2;
+            pane.setLayoutX(x);
+            pane.setLayoutY(y);
+        }
+    }
     
 
     @FXML
     public void initialize() {
+        Platform.runLater(() -> {
+        // centrează panourile
+        centerOverlay(gameOverPane);
+        centerOverlay(pausePane);
+
+        // asigură-te că sunt deasupra la toate
+        gameOverPane.toFront();
+        pausePane.toFront();
+
+        // dacă fereastra se redimensionează, recalculează pozițiile
+        rootPane.widthProperty().addListener((obs, oldVal, newVal) -> {
+            centerOverlay(gameOverPane);
+            centerOverlay(pausePane);
+        });
+        rootPane.heightProperty().addListener((obs, oldVal, newVal) -> {
+            centerOverlay(gameOverPane);
+            centerOverlay(pausePane);
+        });
+    });
+        
+        
+        
+        
         bgImage.setImage(Main.gameBgImage);
         
         Main.stage.getScene().setOnKeyPressed(event -> {
@@ -113,6 +144,7 @@ public class GameController{
                 if (!Main.gamePaused) {
                     timeline.pause();
                     Main.gamePaused = true;
+                    pausePane.toFront();
                     pausePane.setOpacity(1);
                 } else {
                     timeline.play();
@@ -179,8 +211,28 @@ public class GameController{
         rootPane.setOnKeyPressed(event -> {            
             if (!directionChangedThisTick) {
                 KeyCode newDir = event.getCode();
+
+                switch(newDir){
+                    case W ->{
+                        newDir = KeyCode.UP;
+                    }
+                    case S ->{
+                        newDir = KeyCode.DOWN;
+                    }
+                    case A ->{
+                        newDir = KeyCode.LEFT;
+                    }
+                    case D ->{
+                        newDir = KeyCode.RIGHT;
+                    }
+                    default ->{
+                        
+                    }
+                }
+
                 if ((newDir == KeyCode.UP || newDir == KeyCode.DOWN || newDir == KeyCode.LEFT || newDir == KeyCode.RIGHT) && newDir != unvailableDirection) 
                 {
+
                     currentDirectionGeter = newDir;
                     directionChangedThisTick = true;
                 }
@@ -192,11 +244,10 @@ public class GameController{
 
     private void tick() {
         
-        
+        currentDirection = currentDirectionGeter;
 
         directionChangedThisTick = false;
 
-        currentDirection = currentDirectionGeter;
 
 
         double x = Math.random() * 100;
@@ -215,6 +266,7 @@ public class GameController{
         }
 
         
+
 
         switch(currentDirection){
             case UP ->{
@@ -507,9 +559,66 @@ public class GameController{
         scoreLabel.setText("Scor: " + score);
     }
 
+    // private void snakeShowGraphics() {
+    //     // Ștergem vechile ImageView-uri ale șarpelui
+    //     rootPane.getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getId() != null && ((ImageView) node).getId().startsWith("snake"));
+
+    //     List<SnakeNode> nodes = snakeNodes.getNodes();
+
+    //     double scaleX = bgImage.getBoundsInParent().getWidth() / baseWidth;
+    //     double scaleY = bgImage.getBoundsInParent().getHeight() / baseHeight;
+
+    //     double realCellWidth = cellSize * scaleX;
+    //     double realCellHeight = cellSize * scaleY;
+
+    //     for (int i = 0; i < nodes.size(); i++) {
+    //         SnakeNode current = nodes.get(i);
+    //         SnakeNode prev = i > 0 ? nodes.get(i - 1) : null;
+    //         SnakeNode next = i < nodes.size() - 1 ? nodes.get(i + 1) : null;
+
+    //         String imagePath = "";
+
+    //         if(gameOver == false){
+    //             if (i == 0) { // Coada
+    //                 imagePath = getTailImage(current, next);
+    //             } else if (i == nodes.size() - 1) { // Cap
+    //                 imagePath = getHeadImage(current, prev);
+    //             } else { // Corp
+    //                 imagePath = getBodyImage(current, prev, next);
+    //             }
+    //         }
+    //         else{
+    //             if (i == 0) { // Coada
+    //                 imagePath = getTailImage(current, next);
+    //             } else if (i == nodes.size() - 1) { // Cap
+    //                 imagePath = getDeadHeadImage(current, prev);
+    //             } else { // Corp
+    //                 imagePath = getBodyImage(current, prev, next);
+    //             }
+
+    //         }
+
+
+    //         // Încarcă imaginea corect
+    //         ImageView iv = new ImageView(new javafx.scene.image.Image(imagePath));
+    //         iv.setId("snake" + i); // ca să putem șterge mai târziu
+    //         iv.setFitWidth(realCellWidth);
+    //         iv.setFitHeight(realCellHeight);
+    //         iv.setPreserveRatio(false);
+    //         iv.setLayoutX(60 * scaleX + current.getX() * realCellWidth);
+    //         iv.setLayoutY(40 * scaleY + current.getY() * realCellHeight);
+
+    //         rootPane.getChildren().add(iv);
+    //     }
+    // }
+
     private void snakeShowGraphics() {
         // Ștergem vechile ImageView-uri ale șarpelui
-        rootPane.getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getId() != null && ((ImageView) node).getId().startsWith("snake"));
+        rootPane.getChildren().removeIf(node ->
+                node instanceof ImageView &&
+                ((ImageView) node).getId() != null &&
+                ((ImageView) node).getId().startsWith("snake")
+        );
 
         List<SnakeNode> nodes = snakeNodes.getNodes();
 
@@ -524,32 +633,28 @@ public class GameController{
             SnakeNode prev = i > 0 ? nodes.get(i - 1) : null;
             SnakeNode next = i < nodes.size() - 1 ? nodes.get(i + 1) : null;
 
-            String imagePath = "";
+            ImageView iv;
 
-            if(gameOver == false){
+            if (!gameOver) {
                 if (i == 0) { // Coada
-                    imagePath = getTailImage(current, next);
+                    iv = getTailImage(current, next);
                 } else if (i == nodes.size() - 1) { // Cap
-                    imagePath = getHeadImage(current, prev);
+                    iv = getHeadImage(current, prev);
                 } else { // Corp
-                    imagePath = getBodyImage(current, prev, next);
+                    iv = getBodyImage(current, prev, next);
+                }
+            } else {
+                if (i == 0) { // Coada
+                    iv = getTailImage(current, next);
+                } else if (i == nodes.size() - 1) { // Cap mort
+                    iv = getDeadHeadImage(current, prev);
+                } else { // Corp
+                    iv = getBodyImage(current, prev, next);
                 }
             }
-            else{
-                if (i == 0) { // Coada
-                    imagePath = getTailImage(current, next);
-                } else if (i == nodes.size() - 1) { // Cap
-                    imagePath = getDeadHeadImage(current, prev);
-                } else { // Corp
-                    imagePath = getBodyImage(current, prev, next);
-                }
 
-            }
-
-
-            // Încarcă imaginea corect
-            ImageView iv = new ImageView(new javafx.scene.image.Image(imagePath));
-            iv.setId("snake" + i); // ca să putem șterge mai târziu
+            // Setăm dimensiunile și poziția imaginii
+            iv.setId("snake" + i);
             iv.setFitWidth(realCellWidth);
             iv.setFitHeight(realCellHeight);
             iv.setPreserveRatio(false);
@@ -561,7 +666,8 @@ public class GameController{
     }
 
 
-    private String getHeadImage(SnakeNode head, SnakeNode second) {
+
+    private ImageView getHeadImage(SnakeNode head, SnakeNode second) {
         if (head.getX() == second.getX()) {
             return head.getY() < second.getY() ? Main.selectedSkin.getHead_up() : Main.selectedSkin.getHead_down();
         } else {
@@ -569,7 +675,7 @@ public class GameController{
         }
     }
     
-    private String getDeadHeadImage(SnakeNode head, SnakeNode second){
+    private ImageView getDeadHeadImage(SnakeNode head, SnakeNode second){
         if (head.getX() == second.getX()) {
             return head.getY() < second.getY() ? Main.selectedSkin.getDead_head_up() : Main.selectedSkin.getDead_head_down();
         } else {
@@ -578,7 +684,7 @@ public class GameController{
 
     }
 
-    private String getTailImage(SnakeNode tail, SnakeNode second) {
+    private ImageView getTailImage(SnakeNode tail, SnakeNode second) {
         if (tail.getX() == second.getX()) {
             return tail.getY() < second.getY() ? Main.selectedSkin.getBody_end_up() : Main.selectedSkin.getBody_end_down();
         } else {
@@ -586,7 +692,7 @@ public class GameController{
         }
     }
 
-    private String getBodyImage(SnakeNode current, SnakeNode prev, SnakeNode next) {
+    private ImageView getBodyImage(SnakeNode current, SnakeNode prev, SnakeNode next) {
         int dxPrev = current.getX() - prev.getX();
         int dyPrev = current.getY() - prev.getY();
         int dxNext = next.getX() - current.getX();
